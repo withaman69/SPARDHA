@@ -15,6 +15,7 @@ if (!process.env.JWT_SECRET || process.env.JWT_SECRET.length < 24)
 
 const db = new PrismaClient(),
   app = express();
+  app.set("trust proxy", 1);
 const POINTS = { win: 3, draw: 1, loss: 0 }; // used only by /api/standings (match based table)
 const STATUS = ["UPCOMING", "LIVE", "FINAL"],
   CATS = [

@@ -17,10 +17,10 @@ import {
 } from "react-router-dom";
 
 const API = import.meta.env.VITE_API_URL || "http://localhost:4000/api";
-const ADMIN_PATH = "/cesco-admin"; // EDIT: change to a random word plus numbers that only the CESCO team knows
-const FULL_FORM = "Civil Engineering Students’ Council, NIT Goa"; // EDIT: your real CESCO full form
+const ADMIN_PATH = "/aman-tech"; 
+const FULL_FORM = "Civil Engineering Students’ Council, NIT Goa"; 
 const EMAIL = "cesco@nitgoa.ac.in";
-const INSTAGRAM = "https://www.instagram.com/cesco.nitg/?hl=en"; // EDIT: your CESCO Instagram link
+const INSTAGRAM = "https://www.instagram.com/cesco.nitg/?hl=en"; 
 const CONTACT: [string, string][] = [
   ["Email", EMAIL],
  
@@ -1016,7 +1016,32 @@ function Gallery() {
     </div>
   );
 }
-
+const WM_LETTERS: [number, string][] = [
+  [67, 'M74,10H10V60H74V110H10'],
+  [173, 'M10,120V10H74V60H10'],
+  [279, 'M10,120L46,10L82,120M24,82H68'],
+  [393, 'M10,120V10H74V60H10M40,60L74,120'],
+  [499, 'M10,10H68L104,42V78L68,110H10Z'],
+  [635, 'M10,0V120M74,0V120M10,60H74'],
+  [741, 'M10,120L46,10L82,120M24,82H68'],
+]
+const Wordmark = () => (
+  <svg className="wm" viewBox="0 20 900 260" aria-hidden="true">
+    <defs>
+      <linearGradient id="wmRing" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stopColor="#FFC412" stopOpacity="0" /><stop offset=".3" stopColor="#FFC412" /><stop offset=".7" stopColor="#FFC412" /><stop offset="1" stopColor="#FFC412" stopOpacity="0" /></linearGradient>
+      <clipPath id="wmClip"><rect x="-5" y="-5" width="150" height="125" /></clipPath>
+    </defs>
+    <rect className="hit" x="40" y="70" width="820" height="160" />
+    <g transform="rotate(-6 450 150)"><ellipse className="ring" cx="450" cy="150" rx="440" ry="96" pathLength={1} /><ellipse className="ring2" cx="450" cy="150" rx="425" ry="84" pathLength={1} /></g>
+    {WM_LETTERS.map(([x, d], i) => <g key={i} transform={`translate(${x} 90)`} clipPath="url(#wmClip)"><path className="lt" d={d} pathLength={1} style={{ '--i': i } as CSSProperties} /></g>)}
+    <g transform="translate(523.77 117.81) scale(1.0385)"><g className="wm-ball">
+      <circle cx="32" cy="31" r="26" fill="url(#gC)" stroke="#a88c3a" strokeWidth=".8" />
+      <path d="M8 25C24 16 40 18 57 30M14 49C22 34 38 30 55 40" stroke="#3B6FB6" strokeWidth="3.2" fill="none" />
+      <path d="M28 6C24 20 26 38 40 56" stroke="#E2A925" stroke-width="3.2" fill="none" />
+    </g></g>
+    <text className="wm-yr" x="833" y="262" textAnchor="end">{"'26"}</text>
+  </svg>
+)
 const Split = ({ text, start }: { text: string; start: number }) => (
   <>
     {text.split("").map((c, i) => (
@@ -1055,9 +1080,7 @@ function Home() {
           <small className="pres" aria-hidden="true">
             Presents
           </small>
-          <em aria-hidden="true">
-            <Split text="SPARDHA '26" start={5} />
-          </em>
+        <Wordmark />
         </h1>
         <p className="tagline">{FULL_FORM}</p>
         <div className="cta">
