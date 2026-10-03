@@ -1,0 +1,79 @@
+generator client {
+  provider = "prisma-client-js"
+}
+datasource db {
+  provider = "postgresql"
+  url = env("DATABASE_URL")
+}
+model Department {
+  id Int @id @default(autoincrement())
+  name String
+  shortName String @unique
+  matchesA Match[] @relation("A")
+  matchesB Match[] @relation("B")
+    points PointEntry[]
+}
+model Sport {
+  id Int @id @default(autoincrement())
+  name String @unique
+  matches Match[]
+    points PointEntry[]
+}
+model Match {
+  id Int @id @default(autoincrement())
+  sportId Int
+  sport Sport @relation(fields: [sportId], references: [id])
+  teamAId Int
+  teamA Department @relation("A", fields: [teamAId], references: [id])
+  teamBId Int
+  teamB Department @relation("B", fields: [teamBId], references: [id])
+  venue String
+  matchTime DateTime
+  status String @default("UPCOMING")
+  scoreA Int @default(0)
+  scoreB Int @default(0)
+  detail String @default("")
+  winnerId Int?
+  events ScoreEvent[]
+}
+model ScoreEvent {
+  id Int @id @default(autoincrement())
+  matchId Int
+  match Match @relation(fields: [matchId], references: [id], onDelete: Cascade)
+  minute String
+  type String
+  description String
+  createdAt DateTime @default(now())
+}
+model Announcement {
+  id Int @id @default(autoincrement())
+  title String
+  content String
+  category String @default("General")
+  isPinned Boolean @default(false)
+  createdAt DateTime @default(now())
+}
+model Admin {
+  id Int @id @default(autoincrement())
+  email String @unique
+  password String
+  role String @default("ADMIN")
+}
+model PointEntry {
+  id Int @id @default(autoincrement())
+  sportId Int
+  sport Sport @relation(fields: [sportId], references: [id], onDelete: Cascade)
+  departmentId Int
+  department Department @relation(fields: [departmentId], references: [id], onDelete: Cascade)
+  points Int
+  note String @default("")
+  createdAt DateTime @default(now())
+}
+model Photo {
+  id Int @id @default(autoincrement())
+  url String
+  publicId String
+  category String @default("General")
+  caption String @default("")
+  createdAt DateTime @default(now())
+}
