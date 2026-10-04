@@ -24,7 +24,7 @@ const INSTAGRAM = "https://www.instagram.com/cesco.nitg/?hl=en";
 const CONTACT: [string, string][] = [
   ["Email", EMAIL],
  
-  ["Conect us", "Ajaie Ahkash - 9342479393"],
+  ["Connect", "Ajaie Ahkash - 9342479393"],
    ["Instagram", "@cesco.nitg"],
 ]; // EDIT
 
