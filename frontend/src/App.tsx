@@ -25,7 +25,7 @@ const CONTACT: [string, string][] = [
   ["Email", EMAIL],
  
   ["Connect", "Ajaie Ahkash - 9342479393"],
-   ["Instagram", "@cesco.nitg"],
+   ["Instagram", "@cesco.nitg / @nitgoa"],
 ]; // EDIT
 
 type M = {
@@ -124,13 +124,7 @@ const CATS = [
   "Match Result",
   "Emergency Notice",
 ];
-const GALLERY_CATS = [
-  "Volleyball",
-  "Football",
-  "Opening Ceremony",
-  "Prize Distribution",
-  "General",
-];
+const GALLERY_CATS = ['Volleyball', 'Football', 'BGMI', 'Free Fire', 'Opening Ceremony', 'Prize Distribution', 'General']
 const thumb = (u: string) =>
   u.replace("/upload/", "/upload/c_fill,w_600,h_450,q_auto,f_auto/");
 const big = (u: string) =>
@@ -193,6 +187,28 @@ const ALL_RULES: Record<string, string[]> = {
     "A board ends at 25 points or when all coins are pocketed",
     "Tie: one extra board",
   ],
+    // PLACEHOLDER rules: replace with the official BGMI rulebook
+  BGMI: [
+    'Format: department squads play custom room matches on the BGMI mobile game.',
+    'Squad: 4 players per department plus 1 substitute. The squad list is registered before the event.',
+    'Rounds: the committee announces the map and the number of matches before each round.',
+    'Scoring: placement points plus 1 point for every kill. The committee announces the placement table.',
+    'Ranking: the department with the most total points after all matches wins.',
+    'Tie-break: most wins, then most kills.',
+    'Conduct: no hacks, no teaming and no stream sniping. A violation means disqualification.',
+    'Reporting: squads must join the custom room on time. Late squads may lose that match.'
+  ],
+  // PLACEHOLDER rules: replace with the official Free Fire rulebook
+  'Free Fire': [
+    'Format: department squads play custom room matches on Free Fire.',
+    'Squad: 4 players per department plus 1 substitute. The squad list is registered before the event.',
+    'Mode: the committee announces the mode and map before each round.',
+    'Scoring: placement points plus 1 point for every kill. The committee announces the placement table.',
+    'Ranking: the department with the most total points after all matches wins.',
+    'Tie-break: most wins, then most kills.',
+    'Conduct: no hacks, no teaming and no stream sniping. A violation means disqualification.',
+    'Reporting: squads must join the custom room on time. Late squads may lose that match.'
+  ],
 };
 /* Sports shown on the site, in this order. Add a name here once that sport is confirmed. */
 type RuleSection = { title: string; items: string[] }
@@ -249,7 +265,7 @@ const SECTIONED: Record<string, RuleSection[]> = {
 }
 
 /* Sports shown on the site, in this order. Add a name here once that sport is confirmed. */
-const ACTIVE = ['Volleyball', 'Football']
+const ACTIVE = ['Volleyball', 'Football', 'BGMI', 'Free Fire']
 const RULES: Record<string, RuleSection[]> = Object.fromEntries(ACTIVE.map(k => [k, SECTIONED[k] ?? [{ title: 'Rules', items: ALL_RULES[k] }]]))
 /* 3D style sport icons. Shared shading colours are defined once in <Defs /> */
 const Defs = () => (
@@ -295,6 +311,7 @@ const Defs = () => (
         <stop offset=".55" stopColor="#D4D9DE" />
         <stop offset="1" stopColor="#8F979D" />
       </linearGradient>
+      <linearGradient id="gOlive" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stopColor="#B3BA8C" /><stop offset=".5" stopColor="#7B8655" /><stop offset="1" stopColor="#4B5530" /></linearGradient>
     </defs>
   </svg>
 );
@@ -558,6 +575,18 @@ const P: Record<string, ReactNode> = {
       />
     </>
   ),
+    BGMI: <><Sh />
+    <path d="M10 40C10 21 20 10 32 10s22 11 22 30z" fill="url(#gOlive)" stroke="#2f3620" strokeWidth=".9" />
+    <path d="M6 40h52a2.5 2.5 0 0 1 0 5H6a2.5 2.5 0 0 1 0-5z" fill="url(#gOlive)" stroke="#2f3620" strokeWidth=".9" />
+    <path d="M16 28C18 19 25 14 32 13" stroke="#fff" strokeWidth="2.4" opacity=".35" fill="none" strokeLinecap="round" />
+    <path d="M17 46c1 8 6 12 15 12s14-4 15-12" fill="none" stroke="#2b2b2b" strokeWidth="2.6" strokeLinecap="round" />
+    <circle cx="32" cy="27" r="7.5" fill="none" stroke="#FFC412" strokeWidth="1.8" />
+    <path d="M32 16v6M32 32v6M21 27h6M37 27h6" stroke="#FFC412" strokeWidth="1.8" strokeLinecap="round" />
+    <circle cx="32" cy="27" r="1.2" fill="#FFC412" /></>,
+  'Free Fire': <><Sh />
+    <path d="M33 4C32 14 41 18 46 27c4 7 3 16-1 22-4 6-9 9-13 9s-9-3-13-9c-4-6-5-14-1-21 2-4 6-7 7-12 3 3 3 7 3 10 3-3 5-7 5-12 0-3-1-6-1-6z" fill="url(#gO)" stroke="#7a3208" strokeWidth=".9" strokeLinejoin="round" />
+    <path d="M32 28c1 5 7 8 8 14 1 6-3 12-8 12s-9-5-8-11c1-4 4-6 5-10 1 2 2 3 3 3 0-3 0-5 0-8z" fill="url(#gC)" />
+    <ellipse cx="22" cy="34" rx="3" ry="7" fill="#fff" opacity=".25" transform="rotate(12 22 34)" /></>,
 };
 const Icon = ({ name }: { name: string }) => (
   <svg className="icon3" viewBox="0 0 64 64" aria-hidden="true">
@@ -721,7 +750,7 @@ const Footer = () => (
         <InstaIcon />
       </a>
     </div>
-    <p className="copy">2026 Spardha, NIT Goa</p>
+    <p className="copy">2026 Spardha, NIT Goa. Department of Sports × CESCO</p>
   </footer>
 );
 
@@ -1073,15 +1102,7 @@ function Home() {
           <polygon points="50,8 94,90 6,90" />
         </svg>
         <span className="eyebrow box">A NEW ERA OF COMPETITION</span>
-        <h1 aria-label="CESCO presents Spardha '26">
-          <span aria-hidden="true">
-            <Split text="CESCO" start={0} />
-          </span>
-          <small className="pres" aria-hidden="true">
-            Presents
-          </small>
-        <Wordmark />
-        </h1>
+       <h1 aria-label="Sports Department and CESCO present Spardha '26"><small className="collab" aria-hidden="true">Department of Sports <b>×</b></small><span aria-hidden="true"><Split text="CESCO" start={0} /></span><small className="pres" aria-hidden="true">Presents</small><Wordmark /></h1>
         <p className="tagline">{FULL_FORM}</p>
         <div className="cta">
           <button className="pri" onClick={() => go("about")}>
@@ -1109,19 +1130,17 @@ function Home() {
         )}
         <section className="sec two about" id="about">
           <Rv>
-            <Head eyebrow="Who we are" title="About CESCO" />
+            <Head eyebrow="Who we are" title="About SPARDHA" />
             <p>
-              <b>CESCO – Civil Engineering Students’ Council is a community</b>{" "}
-              of students passionate about learning, creating, and growing
-              together.
+              <b>SPARDHA  – Where Rivalries Ignite, Champions Rise.</b>{" "}
+              SPARDHA ’26 is NIT Goa’s first-ever inter-department sports fest, organized by the Civil Engineering Student Council (CESCO) in collaboration with the Sports Department. A celebration of talent, teamwork, and departmental pride, SPARDHA brings every branch together to compete for the ultimate title.
             </p>
             <p>
-              Since 2019, we have been catering to enthusiasts across the
-              institute through projects, workshops, competitions, and engaging
-              activities. Whether you’re a beginner or an enthusiast, CESCO
-              offers opportunities to learn, collaborate, explore your
-              potential, and push your own boundaries.
+         With fierce rivalries, thrilling matchups, and glory on the line, every point counts and every victory matters.
             </p>
+            <p>Be part of the action! Step onto the field, cheer for your branch, and witness the rise of champions.</p>
+            <p> वीर भोग्या वसुंधरा — The brave shall inherit the world.</p>
+            <p>Your branch. Your pride. Your moment. Glory awaits.</p>
           </Rv>
           <Rv>
             <div className="stats">
@@ -1148,7 +1167,7 @@ function Home() {
         </section>
         <section className="sec" id="sports">
           <Rv>
-            <Head eyebrow="Our disciplines" title="Two sports. One spirit." />
+            <Head eyebrow="Our disciplines" title="Diffrent sports. One spirit." />
             <div className="tiles">
               {Object.keys(RULES).map((k) => (
                 <Link
@@ -1528,7 +1547,7 @@ function Admin() {
     const f = new FormData(form);
     const file = f.get("image") as File;
     if (!file || !file.size) return setMsg("Choose a photo first.");
-    if (file.size > 5 * 1024 * 1024) return setMsg("Photo must be under 5 MB.");
+    if (file.size > 30 * 1024 * 1024) return setMsg("Photo must be under 30 MB.");
     setBusy(true);
     setMsg("Uploading...");
     try {
@@ -1992,7 +2011,7 @@ function Admin() {
   );
 }
 
-const LOAD_WORDS = ['CESCO', 'SPARDHA', '2026', ...Object.keys(RULES).map(s => s.toUpperCase())]
+const LOAD_WORDS = ['CESCO', 'SPARDHA', '2026', 'VOLLEYBALL', 'FOOTBALL']
 const LOAD_STEP = 750 // milliseconds each word takes
 function Loader() {
   const [show, setShow] = useState(() => {
