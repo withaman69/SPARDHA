@@ -201,7 +201,7 @@ const ALL_RULES: Record<string, string[]> = {
   // PLACEHOLDER rules: replace with the official Free Fire rulebook
   'Free Fire': [
     'Format: department squads play custom room matches on Free Fire.',
-    'Squad: 4 players per department plus 1 substitute. The squad list is registered before the event.',
+    'Squad: 2 teams per department plus 1 substitute. The squad list is registered before the event.',
     'Mode: the committee announces the mode and map before each round.',
     'Scoring: placement points plus 1 point for every kill. The committee announces the placement table.',
     'Ranking: the department with the most total points after all matches wins.',
@@ -261,7 +261,49 @@ const SECTIONED: Record<string, RuleSection[]> = {
       'Format: league-cum-tournament, round robin',
       'Matches per department: 4 (10 matches in total)',
       'Final placement: 1st is Winner, 2nd is Runner-up'] }
-  ]
+  ],
+    'Free Fire': [
+    { title: '1. Match format and maps', items: [
+      'Format: the tournament consists of 3 matches.',
+      'Each match is played on a different map, in this order:',
+      'Map 1: Bermuda',
+      'Map 2: Kalahari',
+      'Map 3: Purgatory'] },
+    { title: '2. Scoring system (battle royale)', items: [
+      'Kill points: 1 point for every elimination.',
+      'Placement points are given by the final rank in the match:',
+      '1st place: 12 points',
+      '2nd place: 9 points',
+      '3rd place: 8 points',
+      '4th place: 7 points',
+      '5th place: 6 points',
+      '6th place: 5 points',
+      '7th place: 4 points',
+      '8th place: 3 points',
+      '9th place: 2 points',
+      '10th to 12th place: 1 to 0 points'] },
+    { title: '3. Characters and gun skins', items: [
+      'Characters: players may use any character and any character skills. There are no restrictions on character selection or skill combinations.',
+      'Gun skins: all players must turn off gun skins before the match begins. Gun skins are strictly prohibited during the tournament.'] },
+    { title: '4. Fair play', items: [
+      'No teaming with enemies: players must not team up or collaborate with players from opposing teams.',
+      'No match-fixing: intentional teaming, match-fixing and any unfair gameplay are prohibited.',
+      'No glitches: players must not use glitches, bugs or game exploits to gain an unfair advantage.',
+      'No unauthorised tools: third-party tools, scripts, modified game clients and hacks are strictly prohibited.'] },
+    { title: '5. Player absence and match restart', items: [
+      'Absent player: if any player is absent when the match starts, the team must inform the tournament coordinator within 30 seconds of the match starting.',
+      'Restart: if the coordinator is informed within the 30 second window, the match is restarted on the same map.'] },
+    { title: '6. Glitch reporting and penalties', items: [
+      'Reporting: a player who finds a glitch or bug during a match must inform the tournament coordinator immediately.',
+      'Penalty: a team found using glitches, bugs or exploits to gain an unfair advantage is disqualified from that match.',
+      "Points: a disqualified team's points from that match do not count in the tournament standings."] },
+    { title: '7. Tiebreaker order', items: [
+      'If teams are tied on total points, the tie is broken in this exact order:',
+      '1. Most Booyahs: the team with the most match wins (Booyahs) across the tournament ranks higher.',
+      '2. Most overall kills: if still tied, the team with the highest total kills (or kill points) across the tournament ranks higher.',
+      '3. Most placement points: if still tied, the team with the most placement points across all games ranks higher.',
+      '4. Last match performance: if a tie persists, the team with the better rank or points in the final match (or the most recent game both teams played) ranks higher.'] }
+  ],
 }
 
 /* Sports shown on the site, in this order. Add a name here once that sport is confirmed. */
