@@ -304,6 +304,50 @@ const SECTIONED: Record<string, RuleSection[]> = {
       '3. Most placement points: if still tied, the team with the most placement points across all games ranks higher.',
       '4. Last match performance: if a tie persists, the team with the better rank or points in the final match (or the most recent game both teams played) ranks higher.'] }
   ],
+    BGMI: [
+    { title: '1. Event information', items: [
+      'Game: Battlegrounds Mobile India (BGMI).',
+      'Team composition: 4 players per team.',
+      'Mode: TPP Squad (4 players per team).',
+      'Total teams: 5, one team per branch.',
+      'Matches: all 5 teams play 3 matches.',
+      'Map rotation: Erangel for the first 2 matches, then Sanhok.'] },
+    { title: '2. Team registration', items: [
+      'Squad: each branch must submit 4 main players and 2 substitutes.',
+      'Player details: in-game IDs and player names must be submitted 24 hours before the event.'] },
+    { title: '3. Scoring system', items: [
+      'Scoring: points are based on placement plus kills.',
+      'Placement points are given by the final rank in the match:',
+      '1st place: 15 points + kills',
+      '2nd place: 12 points + kills',
+      '3rd place: 10 points + kills',
+      '4th place: 8 points + kills',
+      '5th place: 5 points + kills',
+      'Kill points: +1 for every kill.',
+      'Final ranking: cumulative points after 3 matches.'] },
+    { title: '4. Fair play and devices', items: [
+      'Devices: mobile phones only. Emulators and tablets are not allowed.',
+      'Voice chat: no voice chat abuse.',
+      'Hacks: the use of hacks or modded APKs means instant disqualification.'] },
+    { title: '5. Tiebreaker order', items: [
+      'If teams have equal total points, the tie is broken in this order:',
+      '1. Higher total kills across all matches.',
+      '2. Higher placement in the last match.',
+      '3. Best single match performance (points).',
+      '4. 1v1 sudden death, if still tied.'] },
+    { title: '6. Protests and disputes', items: [
+      'Protest window: 5 minutes after the match results.',
+      'Required evidence: a video recording or a clear screenshot.',
+      'Decision process: a majority vote of the coordinators decides the outcome. If the coordinators cannot reach consensus, the final decision rests with the Tesla President.',
+      'Decision status: final and binding, with no further appeals.'] },
+    { title: '7. Event points', items: [
+      'Points awarded to departments for this event, by final position:',
+      '1st place: 350 points',
+      '2nd place: 280 points',
+      '3rd place: 210 points',
+      '4th place: 140 points',
+      '5th place: 70 points'] }
+  ],
 }
 
 /* Sports shown on the site, in this order. Add a name here once that sport is confirmed. */
