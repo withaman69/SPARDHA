@@ -272,7 +272,7 @@ const SECTIONED: Record<string, RuleSection[]> = {
     { title: '2. Scoring system (battle royale)', items: [
       'Kill points: 1 point for every elimination.',
       'Placement points are given by the final rank in the match:',
-      '1st place: 12 points',
+      '1st place: 10 points',
       '2nd place: 9 points',
       '3rd place: 8 points',
       '4th place: 7 points',
@@ -280,8 +280,7 @@ const SECTIONED: Record<string, RuleSection[]> = {
       '6th place: 5 points',
       '7th place: 4 points',
       '8th place: 3 points',
-      '9th place: 2 points',
-      '10th to 12th place: 1 to 0 points'] },
+      '9th place: 2 points'] },
     { title: '3. Characters and gun skins', items: [
       'Characters: players may use any character and any character skills. There are no restrictions on character selection or skill combinations.',
       'Gun skins: all players must turn off gun skins before the match begins. Gun skins are strictly prohibited during the tournament.'] },
@@ -338,15 +337,9 @@ const SECTIONED: Record<string, RuleSection[]> = {
     { title: '6. Protests and disputes', items: [
       'Protest window: 5 minutes after the match results.',
       'Required evidence: a video recording or a clear screenshot.',
-      'Decision process: a majority vote of the coordinators decides the outcome. If the coordinators cannot reach consensus, the final decision rests with the Tesla President.',
+      'Decision process: a majority vote of the coordinators decides the outcome. If the coordinators cannot reach consensus, the final decision rests with the Cesco President.',
       'Decision status: final and binding, with no further appeals.'] },
-    { title: '7. Event points', items: [
-      'Points awarded to departments for this event, by final position:',
-      '1st place: 350 points',
-      '2nd place: 280 points',
-      '3rd place: 210 points',
-      '4th place: 140 points',
-      '5th place: 70 points'] }
+   
   ],
 }
 

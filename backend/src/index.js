@@ -15,7 +15,7 @@ if (!process.env.JWT_SECRET || process.env.JWT_SECRET.length < 24)
 
 const db = new PrismaClient(),
   app = express();
-  app.set("trust proxy", 1);
+app.set("trust proxy", 1);
 const POINTS = { win: 3, draw: 1, loss: 0 }; // used only by /api/standings (match based table)
 const STATUS = ["UPCOMING", "LIVE", "FINAL"],
   CATS = [
@@ -51,11 +51,12 @@ cloudinary.config({
   api_key: process.env.CLOUDINARY_API_KEY,
   api_secret: process.env.CLOUDINARY_API_SECRET,
 });
-const GCATS = ["Cricket", "Football", "Basketball", "Volleyball", "Tug of War", "Chess", "Table Tennis", "Carrom", "Opening Ceremony", "Prize Distribution", "General"];
+const GCATS = ["Cricket", "Football", "Basketball", "Volleyball", "Tug of War", "Chess", "Table Tennis", "Carrom", "BGMI", "Free Fire", "Opening Ceremony", "Prize Distribution", "General"];
 const upload = multer({
   storage: multer.memoryStorage(),
   limits: { fileSize: 5 * 1024 * 1024, files: 1 },
-  fileFilter: (_q, f, cb) => cb(null, ["image/jpeg", "image/png", "image/webp"].includes(f.mimetype)),
+  fileFilter: (_q, f, cb) =>
+    cb(null, ["image/jpeg", "image/png", "image/webp"].includes(f.mimetype)),
 });
 
 /* ---------- login ---------- */
@@ -327,7 +328,9 @@ app.patch("/api/points/:id", auth, async (req, res) => {
     data.note = note;
   }
   try {
-    res.json(await db.pointEntry.update({ where: { id: +req.params.id }, data }));
+    res.json(
+      await db.pointEntry.update({ where: { id: +req.params.id }, data }),
+    );
   } catch {
     res.status(404).json({ error: "Not found" });
   }
@@ -337,27 +340,47 @@ app.delete("/api/points/:id", auth, async (req, res) => {
   res.status(204).end();
 });
 /* ---------- gallery (images are stored on Cloudinary) ---------- */
-app.get("/api/gallery", async (_q, res) =>
+app.get("/api/", async (_q, res) =>
   res.json(await db.photo.findMany({ orderBy: { createdAt: "desc" } })),
 );
 app.post("/api/gallery", auth, upload.single("image"), async (req, res) => {
   if (!req.file) return bad(res, "Choose a JPG, PNG or WEBP image under 5 MB");
   const { category, caption = "" } = req.body || {};
-  if (!GCATS.includes(category) || typeof caption !== "string" || caption.length > 100)
+  if (
+    !GCATS.includes(category) ||
+    typeof caption !== "string" ||
+    caption.length > 100
+  )
     return bad(res, "Invalid category or caption");
   try {
     const r = await new Promise((ok, fail) =>
       cloudinary.uploader
         .upload_stream(
-          { folder: "cesco-sports", resource_type: "image", transformation: [{ width: 1600, height: 1600, crop: "limit", quality: "auto" }] },
+          {
+            folder: "cesco-sports",
+            resource_type: "image",
+            transformation: [
+              { width: 1600, height: 1600, crop: "limit", quality: "auto" },
+            ],
+          },
           (e, x) => (e ? fail(e) : ok(x)),
         )
         .end(req.file.buffer),
     );
-    res.status(201).json(await db.photo.create({ data: { url: r.secure_url, publicId: r.public_id, category, caption } }));
+    res
+      .status(201)
+      .json(
+        await db.photo.create({
+          data: { url: r.secure_url, publicId: r.public_id, category, caption },
+        }),
+      );
   } catch (e) {
     console.error(e);
-    res.status(502).json({ error: "Upload to Cloudinary failed. Check the Cloudinary keys in .env" });
+    res
+      .status(502)
+      .json({
+        error: "Upload to Cloudinary failed. Check the Cloudinary keys in .env",
+      });
   }
 });
 app.delete("/api/gallery/:id", auth, async (req, res) => {
@@ -370,8 +393,10 @@ app.delete("/api/gallery/:id", auth, async (req, res) => {
 });
 /* ---------- errors and start ---------- */
 app.use((err, _q, res, _n) => {
-  if (err.code === "LIMIT_FILE_SIZE") return res.status(400).json({ error: "Photo must be under 5 MB" });
-  if (err.name === "MulterError") return bad(res, "Upload error: " + err.message);
+  if (err.code === "LIMIT_FILE_SIZE")
+    return res.status(400).json({ error: "Photo must be under 5 MB" });
+  if (err.name === "MulterError")
+    return bad(res, "Upload error: " + err.message);
   console.error(err);
   res.status(500).json({ error: "Server error" });
 });
