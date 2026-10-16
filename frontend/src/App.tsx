@@ -280,7 +280,8 @@ const SECTIONED: Record<string, RuleSection[]> = {
       '6th place: 5 points',
       '7th place: 4 points',
       '8th place: 3 points',
-      '9th place: 2 points'] },
+      '9th place: 2 points',
+  '10th place: 1 point'] },
     { title: '3. Characters and gun skins', items: [
       'Characters: players may use any character and any character skills. There are no restrictions on character selection or skill combinations.',
       'Gun skins: all players must turn off gun skins before the match begins. Gun skins are strictly prohibited during the tournament.'] },
