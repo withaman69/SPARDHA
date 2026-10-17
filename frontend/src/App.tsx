@@ -367,6 +367,16 @@ const SECTIONED: Record<string, RuleSection[]> = {
         "4. Last match performance: if a tie persists, the team with the better rank or points in the final match (or the most recent game both teams played) ranks higher.",
       ],
     },
+    {
+      title: "8. Protests and disputes",
+      items: [
+        "Protest window: 5 minutes after the match results.",
+        "Required evidence: a video recording or a clear screenshot.",
+        "Decision process: a majority vote of the coordinators decides the outcome. If the coordinators cannot reach consensus, the final decision rests with the Cesco President.",
+        "Decision status: final and binding, with no further appeals.",
+      ],
+    },
+
   ],
   BGMI: [
     {
