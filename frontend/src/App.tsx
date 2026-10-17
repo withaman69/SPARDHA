@@ -17,15 +17,15 @@ import {
 } from "react-router-dom";
 
 const API = import.meta.env.VITE_API_URL || "http://localhost:4000/api";
-const ADMIN_PATH = "/aman-tech"; 
-const FULL_FORM = "Civil Engineering Students’ Council, NIT Goa"; 
+const ADMIN_PATH = "/aman-tech";
+const FULL_FORM = "Civil Engineering Students’ Council, NIT Goa";
 const EMAIL = "cesco@nitgoa.ac.in";
-const INSTAGRAM = "https://www.instagram.com/cesco.nitg/?hl=en"; 
+const INSTAGRAM = "https://www.instagram.com/cesco.nitg/?hl=en";
 const CONTACT: [string, string][] = [
   ["Email", EMAIL],
- 
+
   ["Connect", "Ajaie Ahkash - 9342479393"],
-   ["Instagram", "@cesco.nitg / @nitgoa"],
+  ["Instagram", "@cesco.nitg / @nitgoa"],
 ]; // EDIT
 
 type M = {
@@ -124,7 +124,15 @@ const CATS = [
   "Match Result",
   "Emergency Notice",
 ];
-const GALLERY_CATS = ['Volleyball', 'Football', 'BGMI', 'Free Fire', 'Opening Ceremony', 'Prize Distribution', 'General']
+const GALLERY_CATS = [
+  "Volleyball",
+  "Football",
+  "BGMI",
+  "Free Fire",
+  "Opening Ceremony",
+  "Prize Distribution",
+  "General",
+];
 const thumb = (u: string) =>
   u.replace("/upload/", "/upload/c_fill,w_600,h_450,q_auto,f_auto/");
 const big = (u: string) =>
@@ -187,166 +195,250 @@ const ALL_RULES: Record<string, string[]> = {
     "A board ends at 25 points or when all coins are pocketed",
     "Tie: one extra board",
   ],
-    // PLACEHOLDER rules: replace with the official BGMI rulebook
+  // PLACEHOLDER rules: replace with the official BGMI rulebook
   BGMI: [
-    'Format: department squads play custom room matches on the BGMI mobile game.',
-    'Squad: 4 players per department plus 1 substitute. The squad list is registered before the event.',
-    'Rounds: the committee announces the map and the number of matches before each round.',
-    'Scoring: placement points plus 1 point for every kill. The committee announces the placement table.',
-    'Ranking: the department with the most total points after all matches wins.',
-    'Tie-break: most wins, then most kills.',
-    'Conduct: no hacks, no teaming and no stream sniping. A violation means disqualification.',
-    'Reporting: squads must join the custom room on time. Late squads may lose that match.'
+    "Format: department squads play custom room matches on the BGMI mobile game.",
+    "Squad: 4 players per department plus 1 substitute. The squad list is registered before the event.",
+    "Rounds: the committee announces the map and the number of matches before each round.",
+    "Scoring: placement points plus 1 point for every kill. The committee announces the placement table.",
+    "Ranking: the department with the most total points after all matches wins.",
+    "Tie-break: most wins, then most kills.",
+    "Conduct: no hacks, no teaming and no stream sniping. A violation means disqualification.",
+    "Reporting: squads must join the custom room on time. Late squads may lose that match.",
   ],
   // PLACEHOLDER rules: replace with the official Free Fire rulebook
-  'Free Fire': [
-    'Format: department squads play custom room matches on Free Fire.',
-    'Squad: 2 teams per department plus 1 substitute. The squad list is registered before the event.',
-    'Mode: the committee announces the mode and map before each round.',
-    'Scoring: placement points plus 1 point for every kill. The committee announces the placement table.',
-    'Ranking: the department with the most total points after all matches wins.',
-    'Tie-break: most wins, then most kills.',
-    'Conduct: no hacks, no teaming and no stream sniping. A violation means disqualification.',
-    'Reporting: squads must join the custom room on time. Late squads may lose that match.'
+  "Free Fire": [
+    "Format: department squads play custom room matches on Free Fire.",
+    "Squad: 2 teams per department plus 1 substitute. The squad list is registered before the event.",
+    "Mode: the committee announces the mode and map before each round.",
+    "Scoring: placement points plus 1 point for every kill. The committee announces the placement table.",
+    "Ranking: the department with the most total points after all matches wins.",
+    "Tie-break: most wins, then most kills.",
+    "Conduct: no hacks, no teaming and no stream sniping. A violation means disqualification.",
+    "Reporting: squads must join the custom room on time. Late squads may lose that match.",
   ],
 };
 /* Sports shown on the site, in this order. Add a name here once that sport is confirmed. */
-type RuleSection = { title: string; items: string[] }
+type RuleSection = { title: string; items: string[] };
 
 /* Official rulebooks. A sport listed here shows its rules in sections. */
 const SECTIONED: Record<string, RuleSection[]> = {
   Volleyball: [
-    { title: '1. Tournament format', items: [
-      'Format: league-cum-tournament.',
-      'Teams: 5 departments take part.',
-      'Round-robin: every department plays one match against every other department.',
-      'Matches per team: each department plays 4 league matches.',
-      'Total matches: 10 league matches in total.',
-      'Winner: the department finishing 1st in the final league table.',
-      'Runner-up: the department finishing 2nd in the final league table.',
-      'No separate final: the final league standings decide the Winner and Runner-up.'] },
-    { title: '2. Team composition and gender participation', items: [
-      'Roster: each department registers a maximum of 12 players, 10 boys and 2 girls.',
-      'Mandatory participation: at least 1 girl must be on court for every match played.',
-      'Regular sets: the gender requirement applies throughout all regular sets.',
-      'Deciding set exception: in the 3rd deciding set (tie-breaker), teams may play an all-boys team.',
-      'Scope: the all-boys exception applies strictly to the deciding set only.',
-      'Eligibility: only registered players may take part in the tournament.'] },
-    { title: '3. Match format', items: [
-      'Matches are played as best of three (3) sets.',
-      'The first two sets are played to 25 points, subject to the applicable winning-margin rule.',
-      'If tied 1-1, a deciding third set is played to 15 points (the winning-margin rule applies).',
-      'Important: the 3rd set is the only set in which an all-boys playing combination is permitted.'] },
-    { title: '4. League table and ranking', items: [
-      'A league table is maintained for all five departments.',
-      'Each department will have played 4 matches after the league stage.',
-      'Final ranking is decided by the approved tournament points system.',
-      'The 1st ranked department is the Winner and the 2nd ranked department is the Runner-up.',
-      'If teams are tied on points, the committee applies the announced tie-break criteria.'] },
-    { title: '5. Tie-break in league standings', items: [
-      'If departments finish level in the league table, tie-breaks apply in this order:',
-      '1. Head-to-head: the match result between the tied departments.',
-      '2. Set ratio: total sets won divided by total sets lost.',
-      '3. Point ratio: total points won divided by total points conceded.'] },
-    { title: '6. Conduct and match administration', items: [
-      'All teams must report before their scheduled match time.',
-      'Players must keep sportsmanlike conduct throughout the tournament.',
-      "The referee's decisions during play must be respected.",
-      'Any matter not specifically covered is decided by the tournament committee.'] },
-    { title: '7. Tournament summary', items: [
-      'Departments: 5',
-      'Players per department: 12 (10 boys and 2 girls)',
-      'Minimum girls on court: 1 girl is mandatory in regular sets',
-      'Deciding set rule: an all-boys team is permitted',
-      'Format: league-cum-tournament, round robin',
-      'Matches per department: 4 (10 matches in total)',
-      'Final placement: 1st is Winner, 2nd is Runner-up'] }
+    {
+      title: "1. Tournament format",
+      items: [
+        "Format: league-cum-tournament.",
+        "Teams: 5 departments take part.",
+        "Round-robin: every department plays one match against every other department.",
+        "Matches per team: each department plays 4 league matches.",
+        "Total matches: 10 league matches in total.",
+        "Winner: the department finishing 1st in the final league table.",
+        "Runner-up: the department finishing 2nd in the final league table.",
+        "No separate final: the final league standings decide the Winner and Runner-up.",
+      ],
+    },
+    {
+      title: "2. Team composition and gender participation",
+      items: [
+        "Roster: each department registers a maximum of 12 players, 10 boys and 2 girls.",
+        "Mandatory participation: at least 1 girl must be on court for every match played.",
+        "Regular sets: the gender requirement applies throughout all regular sets.",
+        "Deciding set exception: in the 3rd deciding set (tie-breaker), teams may play an all-boys team.",
+        "Scope: the all-boys exception applies strictly to the deciding set only.",
+        "Eligibility: only registered players may take part in the tournament.",
+      ],
+    },
+    {
+      title: "3. Match format",
+      items: [
+        "Matches are played as best of three (3) sets.",
+        "The first two sets are played to 25 points, subject to the applicable winning-margin rule.",
+        "If tied 1-1, a deciding third set is played to 15 points (the winning-margin rule applies).",
+        "Important: the 3rd set is the only set in which an all-boys playing combination is permitted.",
+      ],
+    },
+    {
+      title: "4. League table and ranking",
+      items: [
+        "A league table is maintained for all five departments.",
+        "Each department will have played 4 matches after the league stage.",
+        "Final ranking is decided by the approved tournament points system.",
+        "The 1st ranked department is the Winner and the 2nd ranked department is the Runner-up.",
+        "If teams are tied on points, the committee applies the announced tie-break criteria.",
+      ],
+    },
+    {
+      title: "5. Tie-break in league standings",
+      items: [
+        "If departments finish level in the league table, tie-breaks apply in this order:",
+        "1. Head-to-head: the match result between the tied departments.",
+        "2. Set ratio: total sets won divided by total sets lost.",
+        "3. Point ratio: total points won divided by total points conceded.",
+      ],
+    },
+    {
+      title: "6. Conduct and match administration",
+      items: [
+        "All teams must report before their scheduled match time.",
+        "Players must keep sportsmanlike conduct throughout the tournament.",
+        "The referee's decisions during play must be respected.",
+        "Any matter not specifically covered is decided by the tournament committee.",
+      ],
+    },
+    {
+      title: "7. Tournament summary",
+      items: [
+        "Departments: 5",
+        "Players per department: 12 (10 boys and 2 girls)",
+        "Minimum girls on court: 1 girl is mandatory in regular sets",
+        "Deciding set rule: an all-boys team is permitted",
+        "Format: league-cum-tournament, round robin",
+        "Matches per department: 4 (10 matches in total)",
+        "Final placement: 1st is Winner, 2nd is Runner-up",
+      ],
+    },
   ],
-    'Free Fire': [
-    { title: '1. Match format and maps', items: [
-      'Format: the tournament consists of 3 matches.',
-      'Each match is played on a different map, in this order:',
-      'Map 1: Bermuda',
-      'Map 2: Kalahari',
-      'Map 3: Purgatory'] },
-    { title: '2. Scoring system (battle royale)', items: [
-      'Kill points: 1 point for every elimination.',
-      'Placement points are given by the final rank in the match:',
-      '1st place: 10 points',
-      '2nd place: 9 points',
-      '3rd place: 8 points',
-      '4th place: 7 points',
-      '5th place: 6 points',
-      '6th place: 5 points',
-      '7th place: 4 points',
-      '8th place: 3 points',
-      '9th place: 2 points',
-  '10th place: 1 point'] },
-    { title: '3. Characters and gun skins', items: [
-      'Characters: players may use any character and any character skills. There are no restrictions on character selection or skill combinations.',
-      'Gun skins: all players must turn off gun skins before the match begins. Gun skins are strictly prohibited during the tournament.'] },
-    { title: '4. Fair play', items: [
-      'No teaming with enemies: players must not team up or collaborate with players from opposing teams.',
-      'No match-fixing: intentional teaming, match-fixing and any unfair gameplay are prohibited.',
-      'No glitches: players must not use glitches, bugs or game exploits to gain an unfair advantage.',
-      'No unauthorised tools: third-party tools, scripts, modified game clients and hacks are strictly prohibited.'] },
-    { title: '5. Player absence and match restart', items: [
-      'Absent player: if any player is absent when the match starts, the team must inform the tournament coordinator within 30 seconds of the match starting.',
-      'Restart: if the coordinator is informed within the 30 second window, the match is restarted on the same map.'] },
-    { title: '6. Glitch reporting and penalties', items: [
-      'Reporting: a player who finds a glitch or bug during a match must inform the tournament coordinator immediately.',
-      'Penalty: a team found using glitches, bugs or exploits to gain an unfair advantage is disqualified from that match.',
-      "Points: a disqualified team's points from that match do not count in the tournament standings."] },
-    { title: '7. Tiebreaker order', items: [
-      'If teams are tied on total points, the tie is broken in this exact order:',
-      '1. Most Booyahs: the team with the most match wins (Booyahs) across the tournament ranks higher.',
-      '2. Most overall kills: if still tied, the team with the highest total kills (or kill points) across the tournament ranks higher.',
-      '3. Most placement points: if still tied, the team with the most placement points across all games ranks higher.',
-      '4. Last match performance: if a tie persists, the team with the better rank or points in the final match (or the most recent game both teams played) ranks higher.'] }
+  "Free Fire": [
+    {
+      title: "1. Match format and maps",
+      items: [
+        "Format: the tournament consists of 3 matches.",
+        "Each match is played on a different map, in this order:",
+        "Map 1: Bermuda",
+        "Map 2: Kalahari",
+        "Map 3: Purgatory",
+      ],
+    },
+    {
+      title: "2. Scoring system (battle royale)",
+      items: [
+        "Kill points: 1 point for every elimination.",
+        "Placement points are given by the final rank in the match:",
+        "1st place: 10 points",
+        "2nd place: 9 points",
+        "3rd place: 8 points",
+        "4th place: 7 points",
+        "5th place: 6 points",
+        "6th place: 5 points",
+        "7th place: 4 points",
+        "8th place: 3 points",
+        "9th place: 2 points",
+        "10th place: 1 point",
+      ],
+    },
+    {
+      title: "3. Characters and gun skins",
+      items: [
+        "Characters: players may use any character and any character skills. There are no restrictions on character selection or skill combinations.",
+        "Gun skins: all players must turn off gun skins before the match begins. Gun skins are strictly prohibited during the tournament.",
+      ],
+    },
+    {
+      title: "4. Fair play",
+      items: [
+        "No teaming with enemies: players must not team up or collaborate with players from opposing teams.",
+        "No match-fixing: intentional teaming, match-fixing and any unfair gameplay are prohibited.",
+        "No glitches: players must not use glitches, bugs or game exploits to gain an unfair advantage.",
+        "No unauthorised tools: third-party tools, scripts, modified game clients and hacks are strictly prohibited.",
+      ],
+    },
+    {
+      title: "5. Player absence and match restart",
+      items: [
+        "Absent player: if any player is absent when the match starts, the team must inform the tournament coordinator within 30 seconds of the match starting.",
+        "Restart: if the coordinator is informed within the 30 second window, the match is restarted on the same map.",
+      ],
+    },
+    {
+      title: "6. Glitch reporting and penalties",
+      items: [
+        "Reporting: a player who finds a glitch or bug during a match must inform the tournament coordinator immediately.",
+        "Penalty: a team found using glitches, bugs or exploits to gain an unfair advantage is disqualified from that match.",
+        "Points: a disqualified team's points from that match do not count in the tournament standings.",
+      ],
+    },
+    {
+      title: "7. Tiebreaker order",
+      items: [
+        "If teams are tied on total points, the tie is broken in this exact order:",
+        "1. Most Booyahs: the team with the most match wins (Booyahs) across the tournament ranks higher.",
+        "2. Most overall kills: if still tied, the team with the highest total kills (or kill points) across the tournament ranks higher.",
+        "3. Most placement points: if still tied, the team with the most placement points across all games ranks higher.",
+        "4. Last match performance: if a tie persists, the team with the better rank or points in the final match (or the most recent game both teams played) ranks higher.",
+      ],
+    },
   ],
-    BGMI: [
-    { title: '1. Event information', items: [
-      'Game: Battlegrounds Mobile India (BGMI).',
-      'Team composition: 4 players per team.',
-      'Mode: TPP Squad (4 players per team).',
-      'Total teams: 5, one team per branch.',
-      'Matches: all 5 teams play 3 matches.',
-      'Map rotation: Erangel for the first 2 matches, then Sanhok.'] },
-    { title: '2. Team registration', items: [
-      'Squad: each branch must submit 4 main players and 2 substitutes.',
-      'Player details: in-game IDs and player names must be submitted 24 hours before the event.'] },
-    { title: '3. Scoring system', items: [
-      'Scoring: points are based on placement plus kills.',
-      'Placement points are given by the final rank in the match:',
-      '1st place: 15 points + kills',
-      '2nd place: 12 points + kills',
-      '3rd place: 10 points + kills',
-      '4th place: 8 points + kills',
-      '5th place: 5 points + kills',
-      'Kill points: +1 for every kill.',
-      'Final ranking: cumulative points after 3 matches.'] },
-    { title: '4. Fair play and devices', items: [
-      'Devices: mobile phones only. Emulators and tablets are not allowed.',
-      'Voice chat: no voice chat abuse.',
-      'Hacks: the use of hacks or modded APKs means instant disqualification.'] },
-    { title: '5. Tiebreaker order', items: [
-      'If teams have equal total points, the tie is broken in this order:',
-      '1. Higher total kills across all matches.',
-      '2. Higher placement in the last match.',
-      '3. Best single match performance (points).',
-      '4. 1v1 sudden death, if still tied.'] },
-    { title: '6. Protests and disputes', items: [
-      'Protest window: 5 minutes after the match results.',
-      'Required evidence: a video recording or a clear screenshot.',
-      'Decision process: a majority vote of the coordinators decides the outcome. If the coordinators cannot reach consensus, the final decision rests with the Cesco President.',
-      'Decision status: final and binding, with no further appeals.'] },
-   
+  BGMI: [
+    {
+      title: "1. Event information",
+      items: [
+        "Game: Battlegrounds Mobile India (BGMI).",
+        "Team composition: 4 players per team.",
+        "Mode: TPP Squad (4 players per team).",
+        "Total teams: 5, one team per branch.",
+        "Matches: all 5 teams play 3 matches.",
+        "Map rotation: Erangel for the first 2 matches, then Sanhok.",
+      ],
+    },
+    {
+      title: "2. Team registration",
+      items: [
+        "Squad: each branch must submit 4 main players and 2 substitutes.",
+        "Player details: in-game IDs and player names must be submitted 24 hours before the event.",
+      ],
+    },
+    {
+      title: "3. Scoring system",
+      items: [
+        "Scoring: points are based on placement plus kills.",
+        "Placement points are given by the final rank in the match:",
+        "1st place: 15 points + kills",
+        "2nd place: 12 points + kills",
+        "3rd place: 10 points + kills",
+        "4th place: 8 points + kills",
+        "5th place: 5 points + kills",
+        "Kill points: +1 for every kill.",
+        "Final ranking: cumulative points after 3 matches.",
+      ],
+    },
+    {
+      title: "4. Fair play and devices",
+      items: [
+        "Devices: mobile phones only. Emulators and tablets are not allowed.",
+        "Voice chat: no voice chat abuse.",
+        "Hacks: the use of hacks or modded APKs means instant disqualification.",
+      ],
+    },
+    {
+      title: "5. Tiebreaker order",
+      items: [
+        "If teams have equal total points, the tie is broken in this order:",
+        "1. Higher total kills across all matches.",
+        "2. Higher placement in the last match.",
+        "3. Best single match performance (points).",
+        "4. 1v1 sudden death, if still tied.",
+      ],
+    },
+    {
+      title: "6. Protests and disputes",
+      items: [
+        "Protest window: 5 minutes after the match results.",
+        "Required evidence: a video recording or a clear screenshot.",
+        "Decision process: a majority vote of the coordinators decides the outcome. If the coordinators cannot reach consensus, the final decision rests with the Cesco President.",
+        "Decision status: final and binding, with no further appeals.",
+      ],
+    },
   ],
-}
+};
 
 /* Sports shown on the site, in this order. Add a name here once that sport is confirmed. */
-const ACTIVE = ['Volleyball', 'Football', 'BGMI', 'Free Fire']
-const RULES: Record<string, RuleSection[]> = Object.fromEntries(ACTIVE.map(k => [k, SECTIONED[k] ?? [{ title: 'Rules', items: ALL_RULES[k] }]]))
+const ACTIVE = ["Volleyball", "Football", "BGMI", "Free Fire"];
+const RULES: Record<string, RuleSection[]> = Object.fromEntries(
+  ACTIVE.map((k) => [
+    k,
+    SECTIONED[k] ?? [{ title: "Rules", items: ALL_RULES[k] }],
+  ]),
+);
 /* 3D style sport icons. Shared shading colours are defined once in <Defs /> */
 const Defs = () => (
   <svg width="0" height="0" style={{ position: "absolute" }} aria-hidden="true">
@@ -391,7 +483,11 @@ const Defs = () => (
         <stop offset=".55" stopColor="#D4D9DE" />
         <stop offset="1" stopColor="#8F979D" />
       </linearGradient>
-      <linearGradient id="gOlive" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stopColor="#B3BA8C" /><stop offset=".5" stopColor="#7B8655" /><stop offset="1" stopColor="#4B5530" /></linearGradient>
+      <linearGradient id="gOlive" x1="0" y1="0" x2="1" y2="1">
+        <stop offset="0" stopColor="#B3BA8C" />
+        <stop offset=".5" stopColor="#7B8655" />
+        <stop offset="1" stopColor="#4B5530" />
+      </linearGradient>
     </defs>
   </svg>
 );
@@ -655,18 +751,78 @@ const P: Record<string, ReactNode> = {
       />
     </>
   ),
-    BGMI: <><Sh />
-    <path d="M10 40C10 21 20 10 32 10s22 11 22 30z" fill="url(#gOlive)" stroke="#2f3620" strokeWidth=".9" />
-    <path d="M6 40h52a2.5 2.5 0 0 1 0 5H6a2.5 2.5 0 0 1 0-5z" fill="url(#gOlive)" stroke="#2f3620" strokeWidth=".9" />
-    <path d="M16 28C18 19 25 14 32 13" stroke="#fff" strokeWidth="2.4" opacity=".35" fill="none" strokeLinecap="round" />
-    <path d="M17 46c1 8 6 12 15 12s14-4 15-12" fill="none" stroke="#2b2b2b" strokeWidth="2.6" strokeLinecap="round" />
-    <circle cx="32" cy="27" r="7.5" fill="none" stroke="#FFC412" strokeWidth="1.8" />
-    <path d="M32 16v6M32 32v6M21 27h6M37 27h6" stroke="#FFC412" strokeWidth="1.8" strokeLinecap="round" />
-    <circle cx="32" cy="27" r="1.2" fill="#FFC412" /></>,
-  'Free Fire': <><Sh />
-    <path d="M33 4C32 14 41 18 46 27c4 7 3 16-1 22-4 6-9 9-13 9s-9-3-13-9c-4-6-5-14-1-21 2-4 6-7 7-12 3 3 3 7 3 10 3-3 5-7 5-12 0-3-1-6-1-6z" fill="url(#gO)" stroke="#7a3208" strokeWidth=".9" strokeLinejoin="round" />
-    <path d="M32 28c1 5 7 8 8 14 1 6-3 12-8 12s-9-5-8-11c1-4 4-6 5-10 1 2 2 3 3 3 0-3 0-5 0-8z" fill="url(#gC)" />
-    <ellipse cx="22" cy="34" rx="3" ry="7" fill="#fff" opacity=".25" transform="rotate(12 22 34)" /></>,
+  BGMI: (
+    <>
+      <Sh />
+      <path
+        d="M10 40C10 21 20 10 32 10s22 11 22 30z"
+        fill="url(#gOlive)"
+        stroke="#2f3620"
+        strokeWidth=".9"
+      />
+      <path
+        d="M6 40h52a2.5 2.5 0 0 1 0 5H6a2.5 2.5 0 0 1 0-5z"
+        fill="url(#gOlive)"
+        stroke="#2f3620"
+        strokeWidth=".9"
+      />
+      <path
+        d="M16 28C18 19 25 14 32 13"
+        stroke="#fff"
+        strokeWidth="2.4"
+        opacity=".35"
+        fill="none"
+        strokeLinecap="round"
+      />
+      <path
+        d="M17 46c1 8 6 12 15 12s14-4 15-12"
+        fill="none"
+        stroke="#2b2b2b"
+        strokeWidth="2.6"
+        strokeLinecap="round"
+      />
+      <circle
+        cx="32"
+        cy="27"
+        r="7.5"
+        fill="none"
+        stroke="#FFC412"
+        strokeWidth="1.8"
+      />
+      <path
+        d="M32 16v6M32 32v6M21 27h6M37 27h6"
+        stroke="#FFC412"
+        strokeWidth="1.8"
+        strokeLinecap="round"
+      />
+      <circle cx="32" cy="27" r="1.2" fill="#FFC412" />
+    </>
+  ),
+  "Free Fire": (
+    <>
+      <Sh />
+      <path
+        d="M33 4C32 14 41 18 46 27c4 7 3 16-1 22-4 6-9 9-13 9s-9-3-13-9c-4-6-5-14-1-21 2-4 6-7 7-12 3 3 3 7 3 10 3-3 5-7 5-12 0-3-1-6-1-6z"
+        fill="url(#gO)"
+        stroke="#7a3208"
+        strokeWidth=".9"
+        strokeLinejoin="round"
+      />
+      <path
+        d="M32 28c1 5 7 8 8 14 1 6-3 12-8 12s-9-5-8-11c1-4 4-6 5-10 1 2 2 3 3 3 0-3 0-5 0-8z"
+        fill="url(#gC)"
+      />
+      <ellipse
+        cx="22"
+        cy="34"
+        rx="3"
+        ry="7"
+        fill="#fff"
+        opacity=".25"
+        transform="rotate(12 22 34)"
+      />
+    </>
+  ),
 };
 const Icon = ({ name }: { name: string }) => (
   <svg className="icon3" viewBox="0 0 64 64" aria-hidden="true">
@@ -1126,31 +1282,85 @@ function Gallery() {
   );
 }
 const WM_LETTERS: [number, string][] = [
-  [67, 'M74,10H10V60H74V110H10'],
-  [173, 'M10,120V10H74V60H10'],
-  [279, 'M10,120L46,10L82,120M24,82H68'],
-  [393, 'M10,120V10H74V60H10M40,60L74,120'],
-  [499, 'M10,10H68L104,42V78L68,110H10Z'],
-  [635, 'M10,0V120M74,0V120M10,60H74'],
-  [741, 'M10,120L46,10L82,120M24,82H68'],
-]
+  [67, "M74,10H10V60H74V110H10"],
+  [173, "M10,120V10H74V60H10"],
+  [279, "M10,120L46,10L82,120M24,82H68"],
+  [393, "M10,120V10H74V60H10M40,60L74,120"],
+  [499, "M10,10H68L104,42V78L68,110H10Z"],
+  [635, "M10,0V120M74,0V120M10,60H74"],
+  [741, "M10,120L46,10L82,120M24,82H68"],
+];
 const Wordmark = () => (
   <svg className="wm" viewBox="0 20 900 260" aria-hidden="true">
     <defs>
-      <linearGradient id="wmRing" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stopColor="#FFC412" stopOpacity="0" /><stop offset=".3" stopColor="#FFC412" /><stop offset=".7" stopColor="#FFC412" /><stop offset="1" stopColor="#FFC412" stopOpacity="0" /></linearGradient>
-      <clipPath id="wmClip"><rect x="-5" y="-5" width="150" height="125" /></clipPath>
+      <linearGradient id="wmRing" x1="0" y1="0" x2="1" y2="0">
+        <stop offset="0" stopColor="#FFC412" stopOpacity="0" />
+        <stop offset=".3" stopColor="#FFC412" />
+        <stop offset=".7" stopColor="#FFC412" />
+        <stop offset="1" stopColor="#FFC412" stopOpacity="0" />
+      </linearGradient>
+      <clipPath id="wmClip">
+        <rect x="-5" y="-5" width="150" height="125" />
+      </clipPath>
     </defs>
     <rect className="hit" x="40" y="70" width="820" height="160" />
-    <g transform="rotate(-6 450 150)"><ellipse className="ring" cx="450" cy="150" rx="440" ry="96" pathLength={1} /><ellipse className="ring2" cx="450" cy="150" rx="425" ry="84" pathLength={1} /></g>
-    {WM_LETTERS.map(([x, d], i) => <g key={i} transform={`translate(${x} 90)`} clipPath="url(#wmClip)"><path className="lt" d={d} pathLength={1} style={{ '--i': i } as CSSProperties} /></g>)}
-    <g transform="translate(523.77 117.81) scale(1.0385)"><g className="wm-ball">
-      <circle cx="32" cy="31" r="26" fill="url(#gC)" stroke="#a88c3a" strokeWidth=".8" />
-      <path d="M8 25C24 16 40 18 57 30M14 49C22 34 38 30 55 40" stroke="#3B6FB6" strokeWidth="3.2" fill="none" />
-      <path d="M28 6C24 20 26 38 40 56" stroke="#E2A925" stroke-width="3.2" fill="none" />
-    </g></g>
-    <text className="wm-yr" x="833" y="262" textAnchor="end">{"'26"}</text>
+    <g transform="rotate(-6 450 150)">
+      <ellipse
+        className="ring"
+        cx="450"
+        cy="150"
+        rx="440"
+        ry="96"
+        pathLength={1}
+      />
+      <ellipse
+        className="ring2"
+        cx="450"
+        cy="150"
+        rx="425"
+        ry="84"
+        pathLength={1}
+      />
+    </g>
+    {WM_LETTERS.map(([x, d], i) => (
+      <g key={i} transform={`translate(${x} 90)`} clipPath="url(#wmClip)">
+        <path
+          className="lt"
+          d={d}
+          pathLength={1}
+          style={{ "--i": i } as CSSProperties}
+        />
+      </g>
+    ))}
+    <g transform="translate(523.77 117.81) scale(1.0385)">
+      <g className="wm-ball">
+        <circle
+          cx="32"
+          cy="31"
+          r="26"
+          fill="url(#gC)"
+          stroke="#a88c3a"
+          strokeWidth=".8"
+        />
+        <path
+          d="M8 25C24 16 40 18 57 30M14 49C22 34 38 30 55 40"
+          stroke="#3B6FB6"
+          strokeWidth="3.2"
+          fill="none"
+        />
+        <path
+          d="M28 6C24 20 26 38 40 56"
+          stroke="#E2A925"
+          stroke-width="3.2"
+          fill="none"
+        />
+      </g>
+    </g>
+    <text className="wm-yr" x="833" y="262" textAnchor="end">
+      {"'26"}
+    </text>
   </svg>
-)
+);
 const Split = ({ text, start }: { text: string; start: number }) => (
   <>
     {text.split("").map((c, i) => (
@@ -1182,7 +1392,18 @@ function Home() {
           <polygon points="50,8 94,90 6,90" />
         </svg>
         <span className="eyebrow box">A NEW ERA OF COMPETITION</span>
-       <h1 aria-label="Sports Department and CESCO present Spardha '26"><small className="collab" aria-hidden="true">Department of Sports <b>×</b></small><span aria-hidden="true"><Split text="CESCO" start={0} /></span><small className="pres" aria-hidden="true">Presents</small><Wordmark /></h1>
+        <h1 aria-label="Sports Department and CESCO present Spardha '26">
+          <small className="collab" aria-hidden="true">
+            Department of Sports <b>×</b>
+          </small>
+          <span aria-hidden="true">
+            <Split text="CESCO" start={0} />
+          </span>
+          <small className="pres" aria-hidden="true">
+            Presents
+          </small>
+          <Wordmark />
+        </h1>
         <p className="tagline">{FULL_FORM}</p>
         <div className="cta">
           <button className="pri" onClick={() => go("about")}>
@@ -1212,13 +1433,21 @@ function Home() {
           <Rv>
             <Head eyebrow="Who we are" title="About SPARDHA" />
             <p>
-              <b>SPARDHA  – Where Rivalries Ignite, Champions Rise.</b>{" "}
-              SPARDHA ’26 is NIT Goa’s first-ever inter-department sports fest, organized by the Civil Engineering Student Council (CESCO) in collaboration with the Sports Department. A celebration of talent, teamwork, and departmental pride, SPARDHA brings every branch together to compete for the ultimate title.
+              <b>SPARDHA – Where Rivalries Ignite, Champions Rise.</b> SPARDHA
+              ’26 is NIT Goa’s first-ever inter-department sports fest,
+              organized by the Civil Engineering Student Council (CESCO) in
+              collaboration with the Sports Department. A celebration of talent,
+              teamwork, and departmental pride, SPARDHA brings every branch
+              together to compete for the ultimate title.
             </p>
             <p>
-         With fierce rivalries, thrilling matchups, and glory on the line, every point counts and every victory matters.
+              With fierce rivalries, thrilling matchups, and glory on the line,
+              every point counts and every victory matters.
             </p>
-            <p>Be part of the action! Step onto the field, cheer for your branch, and witness the rise of champions.</p>
+            <p>
+              Be part of the action! Step onto the field, cheer for your branch,
+              and witness the rise of champions.
+            </p>
             <p> वीर भोग्या वसुंधरा — The brave shall inherit the world.</p>
             <p>Your branch. Your pride. Your moment. Glory awaits.</p>
           </Rv>
@@ -1247,7 +1476,10 @@ function Home() {
         </section>
         <section className="sec" id="sports">
           <Rv>
-            <Head eyebrow="Our disciplines" title="Diffrent sports. One spirit." />
+            <Head
+              eyebrow="Our disciplines"
+              title="Diffrent sports. One spirit."
+            />
             <div className="tiles">
               {Object.keys(RULES).map((k) => (
                 <Link
@@ -1301,8 +1533,36 @@ function Home() {
     </>
   );
 }
-const ruleItem = (r: string) => { const k = r.indexOf(': '); return k > 0 && k < 30 ? <><b>{r.slice(0, k)}:</b> {r.slice(k + 2)}</> : r }
-const RuleBlocks = ({ sections, plain }: { sections: RuleSection[]; plain?: boolean }) => <>{sections.map(s => <div className="rsec" key={s.title}>{s.title !== 'Rules' && <h3>{s.title}</h3>}<ul className={plain ? undefined : 'rules'}>{s.items.map(r => <li key={r}>{ruleItem(r)}</li>)}</ul></div>)}</>
+const ruleItem = (r: string) => {
+  const k = r.indexOf(": ");
+  return k > 0 && k < 30 ? (
+    <>
+      <b>{r.slice(0, k)}:</b> {r.slice(k + 2)}
+    </>
+  ) : (
+    r
+  );
+};
+const RuleBlocks = ({
+  sections,
+  plain,
+}: {
+  sections: RuleSection[];
+  plain?: boolean;
+}) => (
+  <>
+    {sections.map((s) => (
+      <div className="rsec" key={s.title}>
+        {s.title !== "Rules" && <h3>{s.title}</h3>}
+        <ul className={plain ? undefined : "rules"}>
+          {s.items.map((r) => (
+            <li key={r}>{ruleItem(r)}</li>
+          ))}
+        </ul>
+      </div>
+    ))}
+  </>
+);
 function SportPage() {
   const { name = "" } = useParams();
   const ms = useApi<M[]>("/matches", DEMO_M, 15000);
@@ -1338,7 +1598,7 @@ function SportPage() {
       </div>
       <section className="sec">
         <Head eyebrow="Rulebook" title="Rules" />
-       <RuleBlocks sections={rules} />
+        <RuleBlocks sections={rules} />
       </section>
       <section className="sec">
         <Head eyebrow="Standings" title={`${name} leaderboard`} />
@@ -1440,8 +1700,12 @@ function Rules() {
   return (
     <div className="wrap">
       <h1>Rules of every sport</h1>
-     {Object.entries(RULES).map(([k, v]) => <details className="card" key={k}><summary>{k}</summary><RuleBlocks sections={v} plain /></details>)}
-      
+      {Object.entries(RULES).map(([k, v]) => (
+        <details className="card" key={k}>
+          <summary>{k}</summary>
+          <RuleBlocks sections={v} plain />
+        </details>
+      ))}
     </div>
   );
 }
@@ -1492,35 +1756,182 @@ function More() {
     </div>
   );
 }
-type OE = { id: number; sportId: number | null; departmentId: number; points: number; note: string; sport: { name: string } | null; department: { shortName: string } }
-const OVERALL_SCALE: [string, number][] = [['1st place', 500], ['2nd place', 400], ['3rd place', 300], ['4th place', 200], ['5th place', 100]] // EDIT: overall points for each final position
+type OE = {
+  id: number;
+  sportId: number | null;
+  departmentId: number;
+  points: number;
+  note: string;
+  sport: { name: string } | null;
+  department: { shortName: string };
+};
+const OVERALL_SCALE: [string, number][] = [
+  ["1st place", 500],
+  ["2nd place", 400],
+  ["3rd place", 300],
+  ["4th place", 200],
+  ["5th place", 100],
+]; // EDIT: overall points for each final position
 
-function OverallAdmin({ meta, entries, call, refresh }: { meta: Meta; entries: OE[] | null; call: (path: string, method: string, body?: unknown) => Promise<boolean>; refresh: number }) {
-  const [edit, setEdit] = useState(0), [pts, setPts] = useState('')
-  const fields = (x?: OE) => <>
-    <label>Sport<select name="sp" defaultValue={x?.sportId ?? 0}><option value={0}>No sport (general)</option>{meta.sports.map(s => <option key={s.id} value={s.id}>{s.name}</option>)}</select></label>
-    <label>Department<select name="dp" defaultValue={x?.departmentId}>{meta.departments.map(s => <option key={s.id} value={s.id}>{s.shortName}</option>)}</select></label>
-    {!x && <label>Final position (fills the points)<select defaultValue="" onChange={e => setPts(e.target.value)}><option value="">Custom</option>{OVERALL_SCALE.map(([l, v]) => <option key={l} value={v}>{l} ({v})</option>)}</select></label>}
-    <label>Overall points{x ? <input name="pt" type="number" step="1" required defaultValue={x.points} /> : <input name="pt" type="number" step="1" required value={pts} onChange={e => setPts(e.target.value)} />}</label>
-    <label>Note (optional)<input name="nt" maxLength={80} defaultValue={x?.note} /></label>
-  </>
+function OverallAdmin({
+  meta,
+  entries,
+  call,
+  refresh,
+}: {
+  meta: Meta;
+  entries: OE[] | null;
+  call: (path: string, method: string, body?: unknown) => Promise<boolean>;
+  refresh: number;
+}) {
+  const [edit, setEdit] = useState(0),
+    [pts, setPts] = useState("");
+  const fields = (x?: OE) => (
+    <>
+      <label>
+        Sport
+        <select name="sp" defaultValue={x?.sportId ?? 0}>
+          <option value={0}>No sport (general)</option>
+          {meta.sports.map((s) => (
+            <option key={s.id} value={s.id}>
+              {s.name}
+            </option>
+          ))}
+        </select>
+      </label>
+      <label>
+        Department
+        <select name="dp" defaultValue={x?.departmentId}>
+          {meta.departments.map((s) => (
+            <option key={s.id} value={s.id}>
+              {s.shortName}
+            </option>
+          ))}
+        </select>
+      </label>
+      {!x && (
+        <label>
+          Final position (fills the points)
+          <select defaultValue="" onChange={(e) => setPts(e.target.value)}>
+            <option value="">Custom</option>
+            {OVERALL_SCALE.map(([l, v]) => (
+              <option key={l} value={v}>
+                {l} ({v})
+              </option>
+            ))}
+          </select>
+        </label>
+      )}
+      <label>
+        Overall points
+        {x ? (
+          <input
+            name="pt"
+            type="number"
+            step="1"
+            required
+            defaultValue={x.points}
+          />
+        ) : (
+          <input
+            name="pt"
+            type="number"
+            step="1"
+            required
+            value={pts}
+            onChange={(e) => setPts(e.target.value)}
+          />
+        )}
+      </label>
+      <label>
+        Note (optional)
+        <input name="nt" maxLength={80} defaultValue={x?.note} />
+      </label>
+    </>
+  );
   const save = (x?: OE) => async (e: FormEvent<HTMLFormElement>) => {
-    e.preventDefault(); const form = e.currentTarget; const f = new FormData(form)
-    const ok = await call(x ? '/overall/' + x.id : '/overall', x ? 'PATCH' : 'POST', { sportId: +(f.get('sp') as string) || null, departmentId: +(f.get('dp') as string), points: +(f.get('pt') as string), note: f.get('nt') })
-    if (ok) { if (x) setEdit(0); else { form.reset(); setPts('') } }
-  }
-  return <>
-    <h2>Add overall points</h2>
-    <p className="meta" style={{ textAlign: 'left', marginBottom: '1rem' }}>The overall leaderboard counts only these entries. Each sport keeps its own scoring on its own leaderboard, so a Volleyball win can count 2 there while the Volleyball winner gets 500 here.</p>
-    <form className="card grid2" onSubmit={save()}>{fields()}<button className="pri">Add to overall</button></form>
-    <h2>All overall entries</h2>
-    {entries?.length === 0 && <p className="meta">No entries yet. The overall leaderboard stays at 0 until you add some.</p>}
-    {entries?.map(x => edit === x.id
-      ? <form key={x.id} className="card grid2" onSubmit={save(x)}>{fields(x)}<div className="row"><button className="pri">Save changes</button><button type="button" onClick={() => setEdit(0)}>Cancel</button></div></form>
-      : <div key={x.id} className="card pe"><div><b>{x.department.shortName}</b> {x.points > 0 ? '+' : ''}{x.points}{x.sport ? ` for ${x.sport.name}` : ''}{x.note && <><br /><small className="meta">{x.note}</small></>}</div>
-        <div className="row"><button onClick={() => setEdit(x.id)}>Edit</button><button className="danger" onClick={() => { if (confirm('Delete this entry?')) call('/overall/' + x.id, 'DELETE') }}>Delete</button></div></div>)}
-    <h2>Overall preview</h2><LBSection key={refresh} />
-  </>
+    e.preventDefault();
+    const form = e.currentTarget;
+    const f = new FormData(form);
+    const ok = await call(
+      x ? "/overall/" + x.id : "/overall",
+      x ? "PATCH" : "POST",
+      {
+        sportId: +(f.get("sp") as string) || null,
+        departmentId: +(f.get("dp") as string),
+        points: +(f.get("pt") as string),
+        note: f.get("nt"),
+      },
+    );
+    if (ok) {
+      if (x) setEdit(0);
+      else {
+        form.reset();
+        setPts("");
+      }
+    }
+  };
+  return (
+    <>
+      <h2>Add overall points</h2>
+      <p className="meta" style={{ textAlign: "left", marginBottom: "1rem" }}>
+        The overall leaderboard counts only these entries. Each sport keeps its
+        own scoring on its own leaderboard, so a Volleyball win can count 2
+        there while the Volleyball winner gets 500 here.
+      </p>
+      <form className="card grid2" onSubmit={save()}>
+        {fields()}
+        <button className="pri">Add to overall</button>
+      </form>
+      <h2>All overall entries</h2>
+      {entries?.length === 0 && (
+        <p className="meta">
+          No entries yet. The overall leaderboard stays at 0 until you add some.
+        </p>
+      )}
+      {entries?.map((x) =>
+        edit === x.id ? (
+          <form key={x.id} className="card grid2" onSubmit={save(x)}>
+            {fields(x)}
+            <div className="row">
+              <button className="pri">Save changes</button>
+              <button type="button" onClick={() => setEdit(0)}>
+                Cancel
+              </button>
+            </div>
+          </form>
+        ) : (
+          <div key={x.id} className="card pe">
+            <div>
+              <b>{x.department.shortName}</b> {x.points > 0 ? "+" : ""}
+              {x.points}
+              {x.sport ? ` for ${x.sport.name}` : ""}
+              {x.note && (
+                <>
+                  <br />
+                  <small className="meta">{x.note}</small>
+                </>
+              )}
+            </div>
+            <div className="row">
+              <button onClick={() => setEdit(x.id)}>Edit</button>
+              <button
+                className="danger"
+                onClick={() => {
+                  if (confirm("Delete this entry?"))
+                    call("/overall/" + x.id, "DELETE");
+                }}
+              >
+                Delete
+              </button>
+            </div>
+          </div>
+        ),
+      )}
+      <h2>Overall preview</h2>
+      <LBSection key={refresh} />
+    </>
+  );
 }
 function Admin() {
   const [tok, setTok] = useState(sessionStorage.getItem("tok") || ""),
@@ -1657,7 +2068,8 @@ function Admin() {
     const f = new FormData(form);
     const file = f.get("image") as File;
     if (!file || !file.size) return setMsg("Choose a photo first.");
-    if (file.size > 30 * 1024 * 1024) return setMsg("Photo must be under 30 MB.");
+    if (file.size > 30 * 1024 * 1024)
+      return setMsg("Photo must be under 30 MB.");
     setBusy(true);
     setMsg("Uploading...");
     try {
@@ -2129,32 +2541,77 @@ function Admin() {
   );
 }
 
-const LOAD_WORDS = ['CESCO', 'SPARDHA', '2026', 'VOLLEYBALL', 'FOOTBALL']
-const LOAD_STEP = 750 // milliseconds each word takes
+const LOAD_WORDS = ["CESCO", "SPARDHA", "2026", "VOLLEYBALL", "FOOTBALL"];
+const LOAD_STEP = 750; // milliseconds each word takes
 function Loader() {
   const [show, setShow] = useState(() => {
-    try { return !sessionStorage.getItem('cesco-seen') && !window.matchMedia('(prefers-reduced-motion: reduce)').matches } catch { return false }
-  })
-  const [out, setOut] = useState(false)
-  const end = (LOAD_WORDS.length - 1) * LOAD_STEP
+    try {
+      return (
+        !sessionStorage.getItem("cesco-seen") &&
+        !window.matchMedia("(prefers-reduced-motion: reduce)").matches
+      );
+    } catch {
+      return false;
+    }
+  });
+  const [out, setOut] = useState(false);
+  const end = (LOAD_WORDS.length - 1) * LOAD_STEP;
   useEffect(() => {
-    if (!show) return
-    try { sessionStorage.setItem('cesco-seen', '1') } catch { /* ignore */ }
-    const root = document.documentElement
-    root.classList.add('loading')
-    const t1 = window.setTimeout(() => setOut(true), end + 1000)
-    const t2 = window.setTimeout(() => setShow(false), end + 1600)
-    return () => { clearTimeout(t1); clearTimeout(t2); root.classList.remove('loading') }
-  }, [show])
-  useEffect(() => { if (out) document.documentElement.classList.remove('loading') }, [out])
-  if (!show) return null
-  const skip = () => { setOut(true); window.setTimeout(() => setShow(false), 600) }
-  return <div className={'loader' + (out ? ' out' : '')} role="status" aria-label="Loading Spardha 26" onClick={skip}>
-    <div className="lstage" style={{ '--step': LOAD_STEP + 'ms' } as CSSProperties}>
-      {LOAD_WORDS.map((w, k) => <span key={w} className={'lw ' + (k % 2 ? 'rtl' : 'ltr') + (k === LOAD_WORDS.length - 1 ? ' last' : '')} style={{ '--k': k } as CSSProperties}><i>{String(k + 1).padStart(2, '0')}</i>{w}</span>)}
+    if (!show) return;
+    try {
+      sessionStorage.setItem("cesco-seen", "1");
+    } catch {
+      /* ignore */
+    }
+    const root = document.documentElement;
+    root.classList.add("loading");
+    const t1 = window.setTimeout(() => setOut(true), end + 1000);
+    const t2 = window.setTimeout(() => setShow(false), end + 1600);
+    return () => {
+      clearTimeout(t1);
+      clearTimeout(t2);
+      root.classList.remove("loading");
+    };
+  }, [show]);
+  useEffect(() => {
+    if (out) document.documentElement.classList.remove("loading");
+  }, [out]);
+  if (!show) return null;
+  const skip = () => {
+    setOut(true);
+    window.setTimeout(() => setShow(false), 600);
+  };
+  return (
+    <div
+      className={"loader" + (out ? " out" : "")}
+      role="status"
+      aria-label="Loading Spardha 26"
+      onClick={skip}
+    >
+      <div
+        className="lstage"
+        style={{ "--step": LOAD_STEP + "ms" } as CSSProperties}
+      >
+        {LOAD_WORDS.map((w, k) => (
+          <span
+            key={w}
+            className={
+              "lw " +
+              (k % 2 ? "rtl" : "ltr") +
+              (k === LOAD_WORDS.length - 1 ? " last" : "")
+            }
+            style={{ "--k": k } as CSSProperties}
+          >
+            <i>{String(k + 1).padStart(2, "0")}</i>
+            {w}
+          </span>
+        ))}
+      </div>
+      <div className="lbar2">
+        <i style={{ animationDuration: `${end + 1000}ms` }} />
+      </div>
     </div>
-    <div className="lbar2"><i style={{ animationDuration: `${end + 1000}ms` }} /></div>
-  </div>
+  );
 }
 
 export default function App() {
