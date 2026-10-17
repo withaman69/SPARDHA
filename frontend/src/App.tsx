@@ -1492,15 +1492,44 @@ function More() {
     </div>
   );
 }
+type OE = { id: number; sportId: number | null; departmentId: number; points: number; note: string; sport: { name: string } | null; department: { shortName: string } }
+const OVERALL_SCALE: [string, number][] = [['1st place', 500], ['2nd place', 400], ['3rd place', 300], ['4th place', 200], ['5th place', 100]] // EDIT: overall points for each final position
 
+function OverallAdmin({ meta, entries, call, refresh }: { meta: Meta; entries: OE[] | null; call: (path: string, method: string, body?: unknown) => Promise<boolean>; refresh: number }) {
+  const [edit, setEdit] = useState(0), [pts, setPts] = useState('')
+  const fields = (x?: OE) => <>
+    <label>Sport<select name="sp" defaultValue={x?.sportId ?? 0}><option value={0}>No sport (general)</option>{meta.sports.map(s => <option key={s.id} value={s.id}>{s.name}</option>)}</select></label>
+    <label>Department<select name="dp" defaultValue={x?.departmentId}>{meta.departments.map(s => <option key={s.id} value={s.id}>{s.shortName}</option>)}</select></label>
+    {!x && <label>Final position (fills the points)<select defaultValue="" onChange={e => setPts(e.target.value)}><option value="">Custom</option>{OVERALL_SCALE.map(([l, v]) => <option key={l} value={v}>{l} ({v})</option>)}</select></label>}
+    <label>Overall points{x ? <input name="pt" type="number" step="1" required defaultValue={x.points} /> : <input name="pt" type="number" step="1" required value={pts} onChange={e => setPts(e.target.value)} />}</label>
+    <label>Note (optional)<input name="nt" maxLength={80} defaultValue={x?.note} /></label>
+  </>
+  const save = (x?: OE) => async (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault(); const form = e.currentTarget; const f = new FormData(form)
+    const ok = await call(x ? '/overall/' + x.id : '/overall', x ? 'PATCH' : 'POST', { sportId: +(f.get('sp') as string) || null, departmentId: +(f.get('dp') as string), points: +(f.get('pt') as string), note: f.get('nt') })
+    if (ok) { if (x) setEdit(0); else { form.reset(); setPts('') } }
+  }
+  return <>
+    <h2>Add overall points</h2>
+    <p className="meta" style={{ textAlign: 'left', marginBottom: '1rem' }}>The overall leaderboard counts only these entries. Each sport keeps its own scoring on its own leaderboard, so a Volleyball win can count 2 there while the Volleyball winner gets 500 here.</p>
+    <form className="card grid2" onSubmit={save()}>{fields()}<button className="pri">Add to overall</button></form>
+    <h2>All overall entries</h2>
+    {entries?.length === 0 && <p className="meta">No entries yet. The overall leaderboard stays at 0 until you add some.</p>}
+    {entries?.map(x => edit === x.id
+      ? <form key={x.id} className="card grid2" onSubmit={save(x)}>{fields(x)}<div className="row"><button className="pri">Save changes</button><button type="button" onClick={() => setEdit(0)}>Cancel</button></div></form>
+      : <div key={x.id} className="card pe"><div><b>{x.department.shortName}</b> {x.points > 0 ? '+' : ''}{x.points}{x.sport ? ` for ${x.sport.name}` : ''}{x.note && <><br /><small className="meta">{x.note}</small></>}</div>
+        <div className="row"><button onClick={() => setEdit(x.id)}>Edit</button><button className="danger" onClick={() => { if (confirm('Delete this entry?')) call('/overall/' + x.id, 'DELETE') }}>Delete</button></div></div>)}
+    <h2>Overall preview</h2><LBSection key={refresh} />
+  </>
+}
 function Admin() {
   const [tok, setTok] = useState(sessionStorage.getItem("tok") || ""),
     [msg, setMsg] = useState(""),
     [n, setN] = useState(0),
     [busy, setBusy] = useState(false);
-  const [tab, setTab] = useState<"matches" | "notices" | "points" | "gallery">(
-      "matches",
-    ),
+  const [tab, setTab] = useState<
+      "matches" | "notices" | "points" | "overall" | "gallery"
+    >("matches"),
     [em, setEm] = useState(0),
     [en, setEn] = useState(0),
     [ep, setEp] = useState(0);
@@ -1513,6 +1542,7 @@ function Admin() {
   const ns = useApi<N[]>("/announcements?t=" + n, []);
   const pe = useApi<PE[]>("/points?t=" + n, []);
   const ph = useApi<Photo[]>("/gallery?t=" + n, []);
+  const oe = useApi<OE[]>("/overall?t=" + n, []);
   const out = () => {
     sessionStorage.removeItem("tok");
     setTok("");
@@ -1853,6 +1883,12 @@ function Admin() {
           Leaderboard points
         </button>
         <button
+          className={tab === "overall" ? "on" : ""}
+          onClick={() => setTab("overall")}
+        >
+          Overall points
+        </button>
+        <button
           className={tab === "gallery" ? "on" : ""}
           onClick={() => setTab("gallery")}
         >
@@ -1976,8 +2012,8 @@ function Admin() {
             style={{ textAlign: "left", marginBottom: "1rem" }}
           >
             Each entry gives one department points in one sport. A sport
-            leaderboard adds up that sport's entries. The overall leaderboard
-            adds up every sport.
+            leaderboard adds up that sport's entries. The overall leaderboard is
+            set separately in the Overall points tab.
           </p>
           <form className="card grid2" onSubmit={savePoint()}>
             {pointFields()}
@@ -2028,6 +2064,8 @@ function Admin() {
           <h2>Live preview</h2>
           <LBSection key={n} />
         </>
+      ) : tab === "overall" ? (
+        <OverallAdmin meta={meta} entries={oe} call={call} refresh={n} />
       ) : (
         <>
           <h2>Upload photo</h2>

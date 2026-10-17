@@ -12,12 +12,14 @@ model Department {
   matchesA Match[] @relation("A")
   matchesB Match[] @relation("B")
     points PointEntry[]
+      overall OverallEntry[]
 }
 model Sport {
   id Int @id @default(autoincrement())
   name String @unique
   matches Match[]
     points PointEntry[]
+      overall OverallEntry[]
 }
 model Match {
   id Int @id @default(autoincrement())
@@ -75,5 +77,16 @@ model Photo {
   publicId String
   category String @default("General")
   caption String @default("")
+  createdAt DateTime @default(now())
+}
+
+model OverallEntry {
+  id Int @id @default(autoincrement())
+  sportId Int?
+  sport Sport? @relation(fields: [sportId], references: [id], onDelete: SetNull)
+  departmentId Int
+  department Department @relation(fields: [departmentId], references: [id], onDelete: Cascade)
+  points Int
+  note String @default("")
   createdAt DateTime @default(now())
 }

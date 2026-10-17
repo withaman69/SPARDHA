@@ -266,14 +266,16 @@ app.get("/api/standings", async (req, res) => {
 /* ---------- leaderboard points entered by the admin ---------- */
 app.get("/api/leaderboard", async (req, res) => {
   const sportId = req.query.sportId ? +req.query.sportId : undefined;
-  const [ds, es] = await Promise.all([
-    db.department.findMany({ orderBy: { id: "asc" } }),
-    db.pointEntry.findMany({ where: sportId ? { sportId } : {} }),
-  ]);
+  const ds = await db.department.findMany({ orderBy: { id: "asc" } });
+  // a sport board adds up that sport's points; the overall board adds up the separate overall entries
+  const es = sportId
+    ? await db.pointEntry.findMany({ where: { sportId } })
+    : await db.overallEntry.findMany();
   const T = Object.fromEntries(
     ds.map((d) => [d.id, { dept: d.shortName, points: 0, entries: 0 }]),
   );
   for (const e of es) {
+    if (!T[e.departmentId]) continue;
     T[e.departmentId].points += e.points;
     T[e.departmentId].entries++;
   }
@@ -282,6 +284,69 @@ app.get("/api/leaderboard", async (req, res) => {
       (a, b) => b.points - a.points || a.dept.localeCompare(b.dept),
     ),
   );
+});
+
+/* ---------- overall leaderboard points, controlled by the admin ---------- */
+const optSport = (v) => (v === null || v === undefined || v === 0 ? null : v);
+app.get("/api/overall", async (_q, res) =>
+  res.json(
+    await db.overallEntry.findMany({
+      include: { sport: true, department: true },
+      orderBy: { createdAt: "desc" },
+    }),
+  ),
+);
+app.post("/api/overall", auth, async (req, res) => {
+  const { sportId, departmentId, points, note } = req.body || {};
+  const s = optSport(sportId);
+  if (
+    !Number.isInteger(departmentId) ||
+    !Number.isInteger(points) ||
+    Math.abs(points) > 100000 ||
+    (s !== null && !Number.isInteger(s)) ||
+    (note !== undefined && (typeof note !== "string" || note.length > 80))
+  )
+    return bad(res, "Invalid overall entry");
+  try {
+    res.status(201).json(
+      await db.overallEntry.create({
+        data: { sportId: s, departmentId, points, note: note || "" },
+      }),
+    );
+  } catch {
+    bad(res, "Invalid sport or department");
+  }
+});
+app.patch("/api/overall/:id", auth, async (req, res) => {
+  const { sportId, departmentId, points, note } = req.body || {},
+    data = {};
+  if (sportId !== undefined) {
+    const s = optSport(sportId);
+    if (s !== null && !Number.isInteger(s)) return bad(res, "Bad sport");
+    data.sportId = s;
+  }
+  if (departmentId !== undefined) {
+    if (!Number.isInteger(departmentId)) return bad(res, "Bad department");
+    data.departmentId = departmentId;
+  }
+  if (points !== undefined) {
+    if (!Number.isInteger(points) || Math.abs(points) > 100000)
+      return bad(res, "Bad points");
+    data.points = points;
+  }
+  if (note !== undefined) {
+    if (typeof note !== "string" || note.length > 80) return bad(res, "Bad note");
+    data.note = note;
+  }
+  try {
+    res.json(await db.overallEntry.update({ where: { id: +req.params.id }, data }));
+  } catch {
+    res.status(404).json({ error: "Not found" });
+  }
+});
+app.delete("/api/overall/:id", auth, async (req, res) => {
+  await db.overallEntry.delete({ where: { id: +req.params.id } }).catch(() => {});
+  res.status(204).end();
 });
 app.get("/api/points", async (_q, res) =>
   res.json(
