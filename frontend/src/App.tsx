@@ -70,7 +70,7 @@ const d = (s: string) => ({ shortName: s });
 const DEMO_M: M[] = [
   {
     id: 1,
-    sport: { name: "Football" },
+    sport: { name: "Futsal" },
     teamA: d("CSE"),
     teamB: d("CVE"),
     venue: "Main Ground",
@@ -126,7 +126,7 @@ const CATS = [
 ];
 const GALLERY_CATS = [
   "Volleyball",
-  "Football",
+  "Futsal",
   "BGMI",
   "Free Fire",
   "Opening Ceremony",
@@ -439,10 +439,67 @@ const SECTIONED: Record<string, RuleSection[]> = {
       ],
     },
   ],
+    Futsal: [
+    { title: '1. Tournament format', items: [
+      'Venue: Basketball Court, NIT Goa (concrete surface).',
+      'Team format: 5-a-side futsal.',
+      'Match duration: 20 minutes, in two halves of 10 minutes each.',
+      'Half-time: 2 minutes.',
+      'Clock: the match clock runs continuously, except when the referee stops play at their discretion.'] },
+    { title: '2. Team composition', items: [
+      'Squad: each team may register a maximum of 10 players.',
+      'On court: a maximum of 5 players per team at any time.',
+      'Substitutes: each team may have up to 5 substitutes.',
+      'Rolling substitutions are allowed throughout the match. Substitutions must be made safely and without interfering with play.'] },
+    { title: '3. Equipment and safety', items: [
+      'Footwear: flat-soled futsal shoes, suitable turf shoes or regular running shoes appropriate for a concrete surface.',
+      'Football boots with studs or cleats are strictly prohibited.',
+      'Slide tackles are strictly prohibited because of the risk of injury on the concrete surface.',
+      'Players must not wear equipment that could endanger themselves or others.',
+      'The referee may stop play if unsafe conditions arise.'] },
+    { title: '4. Playing rules and goalposts', items: [
+      'Goalposts: small, hip-level goalposts are used.',
+      'Goalkeeper: teams may use a goalkeeper, but the goalkeeper must not use hands or arms to stop, catch or control the ball. The goalkeeper plays the ball with the feet or other legally permitted body parts.',
+      'Handball: handball by any player, including the goalkeeper, is prohibited. Deliberate handball gives the opposing team a direct free kick.',
+      'Lines: the painted basketball court lines are the sidelines and goal lines.',
+      'Kick-ins: when the ball goes out over a sideline, play restarts with a kick-in from the sideline. Throw-ins are not permitted.',
+      'Kick-in timing: a kick-in must be taken within 4 seconds of the player being ready.',
+      "Long shots: a goal scored directly from a shot taken from the team's own half, behind the halfway line, does not count unless the ball touches another player before entering the goal."] },
+    { title: '5. Fouls, free kicks and penalties', items: [
+      'Direct free kicks: may be awarded for tripping, pushing, holding, dangerous high kicks and deliberate handball.',
+      'Free kick distance: opposing players must stay at least 3 metres from the ball.',
+      'Referee decision: the referee decides whether a foul warrants a free kick or a penalty under the tournament rules.',
+      'Tournament penalty: one uncontested direct shot from the halfway line towards an empty goal.',
+      'No defending player may stand in front of the goal during a penalty attempt.',
+      'Rebounds are not permitted. The penalty attempt ends after the first shot.'] },
+    { title: '6. Cards and disciplinary actions', items: [
+      "Yellow card: the player leaves the court for 2 minutes and the team plays with one fewer player during this time. The player may return after the suspension with the referee's permission.",
+      "Red card: the player is sent off for the rest of the match and suspended for the team's next match.",
+      "After a red card: the team plays with one fewer player for 5 minutes. After that, a substitute may enter with the referee's permission, provided no other restriction applies.",
+      'Further action: abusive language, violent conduct, deliberate dangerous play or serious unsporting behaviour may lead to further disciplinary action.'] },
+    { title: '7. Knockout matches and tie-breakers', items: [
+      'Draw in a knockout match: the winner is decided by a penalty shootout.',
+      'Each team takes 3 open-goal shots from behind the halfway line.',
+      'The team scoring more goals after three attempts each wins.',
+      'If the scores stay tied, sudden-death attempts continue until a winner is decided.',
+      'Teams should use eligible players for the attempts. The referee explains the order and procedure before the shootout.'] },
+    { title: '8. Reporting time and forfeiture', items: [
+      'Reporting: teams must report to the venue at least 10 minutes before the scheduled kick-off.',
+      'Grace period: 5 minutes after the scheduled kick-off.',
+      'Walkover: if a team fails to report within the grace period, the referee or organisers may declare a walkover.',
+      'Forfeit score: a forfeiting team loses 3-0.'] },
+    { title: '9. Code of conduct and match administration', items: [
+      'Respect: players must respect opponents, referees, organisers and spectators.',
+      'Eligibility: only registered players may take part.',
+      "Referee: the referee's decisions on matters during play are final and binding.",
+      'Organisers: the organisers may interpret these rules and resolve situations not covered in this document.',
+      "President: the President's decision is final in matters requiring an organisers' ruling.",
+      'Note: these are tournament-specific rules for Spardha 2026 and include changes from standard futsal rules.'] }
+  ],
 };
 
 /* Sports shown on the site, in this order. Add a name here once that sport is confirmed. */
-const ACTIVE = ["Volleyball", "Football", "BGMI", "Free Fire"];
+const ACTIVE = ["Volleyball", "Futsal", "BGMI", "Free Fire"];
 const RULES: Record<string, RuleSection[]> = Object.fromEntries(
   ACTIVE.map((k) => [
     k,
@@ -516,7 +573,7 @@ const Gloss = () => (
   />
 );
 const P: Record<string, ReactNode> = {
-  Football: (
+  Futsal: (
     <>
       <Sh />
       <circle
@@ -2551,7 +2608,7 @@ function Admin() {
   );
 }
 
-const LOAD_WORDS = ["CESCO", "SPARDHA", "2026", "VOLLEYBALL", "FOOTBALL"];
+const LOAD_WORDS = ["CESCO", "SPARDHA", "2026", "VOLLEYBALL", "FUTSAL"];
 const LOAD_STEP = 750; // milliseconds each word takes
 function Loader() {
   const [show, setShow] = useState(() => {

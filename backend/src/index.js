@@ -51,7 +51,7 @@ cloudinary.config({
   api_key: process.env.CLOUDINARY_API_KEY,
   api_secret: process.env.CLOUDINARY_API_SECRET,
 });
-const GCATS = ["Cricket", "Football", "Basketball", "Volleyball", "Tug of War", "Chess", "Table Tennis", "Carrom", "BGMI", "Free Fire", "Opening Ceremony", "Prize Distribution", "General"];
+const GCATS = ["Cricket", "Futsal", "Basketball", "Volleyball", "Tug of War", "Chess", "Table Tennis", "Carrom", "BGMI", "Free Fire", "Opening Ceremony", "Prize Distribution", "General"];
 const upload = multer({
   storage: multer.memoryStorage(),
   limits: { fileSize: 5 * 1024 * 1024, files: 1 },
