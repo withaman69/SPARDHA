@@ -126,6 +126,7 @@ const CATS = [
 ];
 const GALLERY_CATS = [
   "Volleyball",
+  "Basketball",
   "Futsal",
   "BGMI",
   "Free Fire",
@@ -456,7 +457,8 @@ const SECTIONED: Record<string, RuleSection[]> = {
       'Football boots with studs or cleats are strictly prohibited.',
       'Slide tackles are strictly prohibited because of the risk of injury on the concrete surface.',
       'Players must not wear equipment that could endanger themselves or others.',
-      'The referee may stop play if unsafe conditions arise.'] },
+      'The referee may stop play if unsafe conditions arise.'
+    ] },
     { title: '4. Playing rules and goalposts', items: [
       'Goalposts: small, hip-level goalposts are used.',
       'Goalkeeper: teams may use a goalkeeper, but the goalkeeper must not use hands or arms to stop, catch or control the ball. The goalkeeper plays the ball with the feet or other legally permitted body parts.',
@@ -464,7 +466,9 @@ const SECTIONED: Record<string, RuleSection[]> = {
       'Lines: the painted basketball court lines are the sidelines and goal lines.',
       'Kick-ins: when the ball goes out over a sideline, play restarts with a kick-in from the sideline. Throw-ins are not permitted.',
       'Kick-in timing: a kick-in must be taken within 4 seconds of the player being ready.',
-      "Long shots: a goal scored directly from a shot taken from the team's own half, behind the halfway line, does not count unless the ball touches another player before entering the goal."] },
+      "Long shots: a goal scored directly from a shot taken from the team's own half, behind the halfway line, does not count unless the ball touches another player before entering the goal.",
+      'No player may deliberately move, obstruct or hold the goalposts.',
+    'Corner Kick Rule: If the ball goes out of play after hitting an opposing player, it will result in a corner kick on the third such occurrence.'] },
     { title: '5. Fouls, free kicks and penalties', items: [
       'Direct free kicks: may be awarded for tripping, pushing, holding, dangerous high kicks and deliberate handball.',
       'Free kick distance: opposing players must stay at least 3 metres from the ball.',
@@ -494,12 +498,41 @@ const SECTIONED: Record<string, RuleSection[]> = {
       "Referee: the referee's decisions on matters during play are final and binding.",
       'Organisers: the organisers may interpret these rules and resolve situations not covered in this document.',
       "President: the President's decision is final in matters requiring an organisers' ruling.",
-      'Note: these are tournament-specific rules for Spardha 2026 and include changes from standard futsal rules.'] }
+           'Note: these are tournament-specific rules for Spardha 2026 and include changes from standard futsal rules.'] }
+  ],
+  Basketball: [
+    { title: "1. Match format", items: [
+      "Team format: 5-a-side basketball.",
+      "Match duration: four quarters of 8 minutes each.",
+      "Overtime: 3 minutes if the scores are level at the end of the match.",
+      "Timeouts: one timeout per half.",
+    ] },
+    { title: "2. Team composition", items: [
+      "Squad: each department registers its players before the event.",
+      "On court: 5 players per team at any time.",
+      "Eligibility: only registered players may take part.",
+    ] },
+    { title: "3. Scoring", items: [
+      "Inside the arc: 2 points.",
+      "Outside the arc: 3 points.",
+      "Free throw: 1 point.",
+    ] },
+    { title: "4. Fouls and discipline", items: [
+      "Personal fouls: a player is out after five fouls.",
+      "Technical fouls: two technical fouls mean ejection.",
+      "Jump ball: possession alternates.",
+    ] },
+    { title: "5. Reporting time and conduct", items: [
+      "Reporting: teams must report before their scheduled match time.",
+      "Respect: players must respect opponents, referees and organisers.",
+      "Referee: the referee's decisions during play are final.",
+      "Organisers: matters not covered here are decided by the tournament committee.",
+    ] },
   ],
 };
 
 /* Sports shown on the site, in this order. Add a name here once that sport is confirmed. */
-const ACTIVE = ["Volleyball", "Futsal", "BGMI", "Free Fire"];
+const ACTIVE = ["Volleyball", "Futsal","Basketball", "Cricket", "Tug of War", "Chess", "Table Tennis", "Carrom", "BGMI", "Free Fire"];
 const RULES: Record<string, RuleSection[]> = Object.fromEntries(
   ACTIVE.map((k) => [
     k,
@@ -1418,7 +1451,7 @@ const Wordmark = () => (
         <path
           d="M28 6C24 20 26 38 40 56"
           stroke="#E2A925"
-          stroke-width="3.2"
+          strokeWidth="3.2"
           fill="none"
         />
       </g>
@@ -1545,7 +1578,7 @@ function Home() {
           <Rv>
             <Head
               eyebrow="Our disciplines"
-              title="Diffrent sports. One spirit."
+              title="Different sports. One spirit."
             />
             <div className="tiles">
               {Object.keys(RULES).map((k) => (
