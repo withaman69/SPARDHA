@@ -532,7 +532,7 @@ const SECTIONED: Record<string, RuleSection[]> = {
 };
 
 /* Sports shown on the site, in this order. Add a name here once that sport is confirmed. */
-const ACTIVE = ["Volleyball", "Futsal","Basketball", "Cricket", "Tug of War", "Chess", "Table Tennis", "Carrom", "BGMI", "Free Fire"];
+const ACTIVE = ["Volleyball", "Futsal", "BGMI", "Free Fire"];
 const RULES: Record<string, RuleSection[]> = Object.fromEntries(
   ACTIVE.map((k) => [
     k,
