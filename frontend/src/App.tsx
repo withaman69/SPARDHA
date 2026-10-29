@@ -125,14 +125,8 @@ const CATS = [
   "Emergency Notice",
 ];
 const GALLERY_CATS = [
-  "Volleyball",
-  "Basketball",
-  "Futsal",
-  "BGMI",
-  "Free Fire",
-  "Opening Ceremony",
-  "Prize Distribution",
-  "General",
+  "Volleyball", "Basketball", "Futsal", "BGMI", "Free Fire", "Table Tennis",
+  "Opening Ceremony", "Prize Distribution", "General",
 ];
 const thumb = (u: string) =>
   u.replace("/upload/", "/upload/c_fill,w_600,h_450,q_auto,f_auto/");
@@ -529,10 +523,92 @@ const SECTIONED: Record<string, RuleSection[]> = {
       "Organisers: matters not covered here are decided by the tournament committee.",
     ] },
   ],
+    "Table Tennis": [
+    { title: "1. Format and teams", items: [
+      "Branches: CSE, CVE, ECE, EEE and MCE. Rules follow ITTF.",
+      "Format: single round-robin. Each team plays the other 4 teams once, 10 matches in total.",
+      "Team: 3 players, 2 boys and 1 girl.",
+      "Doubles: boys only, so both boys play doubles.",
+      "Girl: plays Singles 2 only.",
+    ] },
+    { title: "2. Match format", items: [
+      "Each branch match consists of 3 games, played in this order:",
+      "1. Singles 1: boy vs boy.",
+      "2. Singles 2: girl vs girl.",
+      "3. Doubles: boys pair vs boys pair.",
+      "The first team to win 2 games wins the match. The match stops there and the 3rd game is not played.",
+      "Line-up: before the match, the team captain submits the line-up in writing (who plays Singles 1, who plays doubles). Once submitted, it cannot be changed.",
+    ] },
+    { title: "3. Points and ranking", items: [
+      "Match win: 2 points. Loss: 0 points.",
+      "Walkover: the winner of a walkover is awarded 2-0.",
+      "Champion: the team with the most points after all 10 matches.",
+      "Runner-up: the team in second place.",
+      "If teams are tied on points, the tie is broken in this order:",
+      "1. Match difference: matches won minus matches lost.",
+      "2. Game difference: games won minus games lost.",
+      "3. Set difference: sets won minus sets lost.",
+      "4. Point difference: points scored minus points conceded.",
+      "5. If still tied, the organiser decides the winner through a decider match or toss.",
+    ] },
+    { title: "4. Equipment and court", items: [
+      "Table: 2.74 m × 1.525 m, 76 cm high.",
+      "Net height: 15.25 cm.",
+      "Ball: 40+ mm plastic ball, white or orange.",
+      "Bats: must have ITTF-approved rubber or be approved by the organiser.",
+      "Court: there should be enough space for players to move freely.",
+    ] },
+    { title: "5. Match scoring", items: [
+      "Set: a set goes to 11 points.",
+      "Deuce: at 10-10, the first player to get a 2-point lead wins the set.",
+      "Game: each game is best of 3 sets (first to win 2 sets).",
+      "Scoring system: rally point. Every rally scores a point.",
+    ] },
+    { title: "6. Service", items: [
+      "Grip: the server holds the ball on an open, flat palm, stationary, above the table and behind the end line.",
+      "Toss: the ball must be thrown at least 16 cm almost vertically upward and struck on the way down.",
+      "Path: the serve must bounce on the server's court, cross over the net and bounce on the opponent's court.",
+      "Hiding: the server must not hide the ball with the free arm or body.",
+      "Rotation: service changes every 2 points. After 10-10 it changes every 1 point.",
+      "Let: if a serve touches the net but lands in the correct court, it is a let and is replayed.",
+      "First serve: the first serve of a game is decided by toss. Service order alternates in the next game.",
+      "Last game: in the last game, players change ends after 5 points.",
+    ] },
+    { title: "7. Special rules for doubles", items: [
+      "Serve: the serve goes diagonally, from the server's right court to the receiver's right court.",
+      "Hitting: partners must hit the ball alternately. The same player must not hit twice in a row.",
+      "Order: the order of first server and receiver is fixed at the start of each game and does not change during that game (it may change in the next game).",
+    ] },
+    { title: "8. Time and breaks", items: [
+      "Warm-up: maximum 2 minutes.",
+      "Break: 1 minute between sets.",
+      "Timeout: each player or pair gets 1 timeout (1 minute) per set.",
+      "Towel break: allowed after every 6 points.",
+    ] },
+    { title: "9. Walkover and late arrival", items: [
+      "Late arrival: if a team does not arrive at the fixture time, a 15 minute grace period applies. After that, the opponent gets a walkover.",
+      "Injury: a player gets a maximum rest of 10 minutes. After that, the match is a walkover.",
+      "Replacements: a girl cannot be replaced by a boy, or a boy by a girl.",
+      "Absent girl: if the girl is absent, Singles 2 is forfeited.",
+    ] },
+    { title: "10. Conduct and discipline", items: [
+      "Bench: only one coach or captain may sit on the bench.",
+      "Coaching: allowed only between games and during a timeout, not during a rally.",
+      "Yellow card: a warning.",
+      "Yellow + red card: 1 point penalty.",
+      "Second red card: 2 point penalty.",
+      "Third red card: the player is disqualified from that match.",
+      "Serious misconduct: abusive language, breaking a bat or table, or refusing to accept the umpire's decision. The team may be disqualified.",
+    ] },
+    { title: "11. Officials", items: [
+      "Umpire: each match has 1 umpire. The umpire's decision is final.",
+      "Disputes: any dispute goes only to the Tournament Committee, within 10 minutes after the match.",
+    ] },
+  ],
 };
 
 /* Sports shown on the site, in this order. Add a name here once that sport is confirmed. */
-const ACTIVE = ["Volleyball", "Futsal", "BGMI", "Free Fire"];
+const ACTIVE = ["Volleyball", "Futsal", "BGMI", "Free Fire", "Table Tennis"];
 const RULES: Record<string, RuleSection[]> = Object.fromEntries(
   ACTIVE.map((k) => [
     k,
