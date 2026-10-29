@@ -535,7 +535,7 @@ const SECTIONED: Record<string, RuleSection[]> = {
       "Each branch match consists of 3 games, played in this order:",
       "1. Singles 1: boy vs boy.",
       "2. Singles 2: girl vs girl.",
-      "3. Doubles: boys pair vs boys pair.",
+      "3. Doubles:  Boys/Girls/Mixed pair vs Boys/Girls/Mixed pair.",
       "The first team to win 2 games wins the match. The match stops there and the 3rd game is not played.",
       "Line-up: before the match, the team captain submits the line-up in writing (who plays Singles 1, who plays doubles). Once submitted, it cannot be changed.",
     ] },
